@@ -33,7 +33,7 @@
       switch($controller){
         case $this->Views['index']:
           $_SESSION['ACTION'] = '2';
-          require_once($_SESSION['BASE_DIR_BACKEND'].'/controllers/triggers/login_trigger.php');
+          require_once($_SESSION['BASE_DIR_BACKEND'].'/controllers/triggers/login.php');
           break;
         default: 
           break;

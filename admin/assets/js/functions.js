@@ -64,7 +64,7 @@ $(document).ready(function(){
           };
           $.ajax({
             type:          "post",
-            url:           "./controllers/triggers/login_trigger.php",
+            url:           "./controllers/triggers/login.php",
             async:         true,
             cache:         false,
             data:          JSON.stringify(data),

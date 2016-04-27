@@ -1,6 +1,6 @@
 <?php
   @session_start();
-  require_once($_SESSION['BASE_DIR_BACKEND'].'/models/login/crud/crud.php');
+  require_once($_SESSION['BASE_DIR_BACKEND'].'/models/login.php');
   class Login_trigger{
     private $Request;
     private $Response;
@@ -96,7 +96,6 @@
             $this->unset_Session();
           }
           else{
-            sessop
             header("Location: {$_SESSION['BASE_DIR_FRONTEND']}/views/panel.php");
           }
           break;
