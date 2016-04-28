@@ -16,10 +16,7 @@
     
     }
     private function is_Session(){
-      return (isset($_COOKIE['__ugate']) && isset($_COOKIE['__uanchor']) && isset($_COOKIE['__ukey']))    
-              ||
-             (isset($_SESSION['__ugate']) && isset($_SESSION['__uanchor']) && isset($_SESSION['__ukey']))
-              ?  true : false;
+      return (isset($_COOKIE['__ugate']) && isset($_COOKIE['__uanchor']) && isset($_COOKIE['__ukey']))  ?  true : false;
     }
     private function load_views($view){
       switch($view){
@@ -35,8 +32,7 @@
       switch($controller){
         case 'index':
           $_SESSION['ACTION'] = '2';
-          var_dump($_SESSION);
-          //require_once($_SESSION['BASE_DIR_BACKEND'].'/controllers/triggers/login.php');
+          require_once($_SESSION['BASE_DIR_BACKEND'].'/controllers/triggers/login.php');
           break;
         default: 
           break;

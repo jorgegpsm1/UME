@@ -133,9 +133,16 @@
       setcookie('__ukey',$this->Request['Keys'],time() + $cookie_time, '/');
     }
     private function set_Session_temp(){
-      $_SESSION['__ugate'] = $this->Request['ID'];
-      $_SESSION['__ugate'] = $this->Request['Sessions'];
-      $_SESSION['__ukey']  = $this->Request['Keys'];
+      header('Cache-control: private'); 
+      header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT'); 
+      header('Cache-Control: no-store, no-cache, must-revalidate'); 
+      header('Cache-Control: post-check=0, pre-check=0', false); 
+      header('Pragma: no-cache');
+
+      $cookie_time = (60 * 20);
+      setcookie('__ugate',$this->Request['ID'],time() + $cookie_time, '/');
+      setcookie('__uanchor',$this->Request['Sessions'],time() + $cookie_time, '/');
+      setcookie('__ukey',$this->Request['Keys'],time() + $cookie_time, '/');
     }
     public function Main(){    
       switch ($this->Action){
