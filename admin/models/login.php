@@ -10,6 +10,7 @@
       $this->Connection   = Database::connect();
     }
     private function set_Query(){
+      $this->Query        = null;
       switch ($this->Request['Action']){
         case '1':
           $this->Query['SQL_A']       = "SELECT ID_USER AS ID, USER_LOGIN AS USER, USER_PASS AS PASS FROM USER";
@@ -21,11 +22,7 @@
           break;
 
         case '1.2':
-          $this->Query['SQL_A']       = "INSERT INTO USER_MULTIPLE_ACCESS_1 (ID_SESSION, USER_KEY, USER_TEMP) VALUES (:SESSION, :KEYS, :TEMP)";
-          break;
-
-        case '1.3':
-          $this->Query['SQL_A']       = "INSERT INTO USER_MULTIPLE_ACCESS_1 (ID_SESSION, USER_KEY, USER_TEMP) VALUES (:SESSION, :KEYS, :TEMP)";
+          $this->Query['SQL_A']       = "INSERT INTO USER_MULTIPLE_ACCESS_{$this->Request['ID']} (ID_SESSION, USER_KEY, USER_TEMP) VALUES (:SESSION, :KEYS, :TEMP)";
           break;
 
         case '2':
@@ -77,7 +74,7 @@
             $result_1 = $this->Connection->prepare($this->Query['SQL_A']);
             $result_2 = $this->Connection->prepare($this->Query['SQL_B']);
 
-            $result_1->execute() or die("Muerio_1");
+            $result_1->execute();
             while($row = $result_1->fetch(PDO::FETCH_ASSOC)){
               if($row['ID'] == $this->Request['ID']){
                 $this->Response['ID']       = $row['ID'];
@@ -87,11 +84,11 @@
                 break;
                 }
               }
-            $result_1->closeCursor();
 
             $result_2->bindParam(':ID',$this->Response['ID']);
             $result_2->bindParam(':SESSIONS',$this->Response['Sessions']);
             $result_2->execute();
+
             $this->Response['Success']  = true;
           }
           catch(PDOException $e){
@@ -109,15 +106,13 @@
             $result->bindParam(':KEYS',$this->Request['Keys']);
             $result->bindParam(':TEMP',$this->Request['Temp']);
             $result->execute();
+
             $this->Response['Success']  = true;
-            break;
           }
           catch(PDOException $e){
-            $this->Response['Success'] = false;
             echo "DataBase Error: The user could not be added.<br>".$e->getMessage();
           }
           catch(Exception $e){
-            $this->Response['Success'] = false;
             echo "General Error: The user could not be added.<br>".$e->getMessage();
           }
           break;

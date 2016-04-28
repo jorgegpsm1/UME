@@ -27,7 +27,7 @@
             $this->Response                     = null; 
           }
           else{
-            die("ACTION 1");
+            die("Request Vacio");
           }
           break;
         case '1.1':
@@ -37,7 +37,6 @@
         break;
 
         case '1.2':
-          $this->Request['ID']                = $this->Response['ID'];
           $this->Request['Sessions']          = $this->Response['Sessions'];
           $this->Request['Keys']              = sha1(sha1($this->Request['NameUser'].'?'.$this->Request['ID']).'?'.$this->Response['Sessions']);
           $this->Request['Temp']              = (!$this->Request['CheckUser']);
@@ -62,28 +61,27 @@
           break;
       }
     }
-    private function set_Request(){
+    private function set_Response(){
       switch ($this->Action){
         case '1':
           $this->Response = $this->CRUD->get_Response($this->Request);
 
           if($this->Response['Success']){
-            $this->Request['PasswordSession']   = sha1($this->Request['NameUser'].'?'.$this->Response['ID']);
             $this->Action = '1.1';
             $this->get_Request();
             $this->Response = $this->CRUD->get_Response($this->Request);
-            $this->Action = '1.2';
+            if($this->Response['Success']){
+              
+              $this->Action = '1.2';
+              $this->get_Request();
+              $this->Response = $this->CRUD->get_Response($this->Request);
 
-            if($this->is_Autologin()){
-              $this->get_Request();
-              $this->Response = $this->CRUD->get_Response($this->Request);
+            if($this->is_Autologin())
               $this->set_Session();       
-            }
-            else{
-              $this->get_Request();
-              $this->Response = $this->CRUD->get_Response($this->Request);
+            else
               $this->set_Session_temp();
-             }
+              
+            }
           }
           unset($this->CRUD);
           header('Content-Type: application/json');
@@ -92,12 +90,11 @@
 
         case '2':
           $this->Response = $this->CRUD->get_Response($this->Request);
-          if(!$this->Response['Success']){
+          if(!$this->Response['Success'])
             $this->unset_Session();
-          }
-          else{
+          else
             header("Location: {$_SESSION['BASE_DIR_FRONTEND']}/views/panel.php");
-          }
+
           break;
 
         default:
@@ -144,11 +141,11 @@
       switch ($this->Action){
         case '1':
           $this->get_Request();
-          $this->set_Request();
+          $this->set_Response();
           break;
         case '2':
           $this->get_Request();
-          $this->set_Request();
+          $this->set_Response();
           break;
         default:
           break;

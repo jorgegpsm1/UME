@@ -34,22 +34,6 @@
       <a id="user_login" href="#" class="btn btn-login btn-danger btn-float" tabindex="3">
         <i class="icon-arrow-right2"></i>
       </a>
-      <ul class="login-navigation">
-        <li data-block="#l-forget-password" class="bgm-orange">Olvide mi Contraseña</li>
-      </ul>
-    </div>
-    <div class="lc-block" id="l-forget-password">
-      <p class="text-left">Porfavor ingrese su correo para poder restaurar su contraseña.</p>
-      <div class="input-group m-b-20">
-        <span class="input-group-addon"><i class="icon-mail4"></i></span>
-        <div class="fg-line">
-          <input type="text" class="form-control" placeholder="Correo Electrónico">
-        </div>
-      </div>
-      <a href="" class="btn btn-login btn-danger btn-float"><i class="icon-arrow-right2"></i></a>
-      <ul class="login-navigation">
-        <li data-block="#l-login" class="bgm-green">Iniciar Sesión</li>
-      </ul>
     </div>
     <script src="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/jquery/dist/jquery.min.js'); ?>"></script>
     <script src="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
