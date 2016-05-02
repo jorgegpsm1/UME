@@ -27,7 +27,7 @@
             $this->Response                     = null; 
           }
           else{
-            die("Request Vacio");
+            die("Error Interno");
           }
           break;
         case '1.1':
@@ -45,8 +45,8 @@
         break;
 
         case '2':
-          if($this->is_Request($this->type_Session())){
-            $this->Request                      = $this->type_Session();
+          if($this->is_Request($_COOKIE)){
+            $this->Request                      = $_COOKIE;
             $this->Request['__uanchor']         = stripslashes(strip_tags(htmlspecialchars(trim($this->Request['__uanchor']))));
             $this->Request['__ugate']           = stripslashes(strip_tags(htmlspecialchars(trim($this->Request['__ugate']))));
             $this->Request['__ukey']            = stripslashes(strip_tags(htmlspecialchars(trim($this->Request['__ukey']))));
@@ -54,7 +54,7 @@
             $this->Response                     = null; 
           }
           else{
-            die("ACTION 2");
+            die("Error Interno");
           }
           break;
         default:
@@ -104,21 +104,13 @@
     private function is_Request($Request){
       return isset($Request) ? true : false;
     }
-    private function type_Session(){
-      if(isset($_COOKIE)){
-        return $_COOKIE;
-      }
-      else{
-        return $_SESSION;
-      }
-    }
     private function is_Autologin(){
       return ($this->Request['CheckUser'])? true : false;
     }
     private function unset_Session(){
-      unset($_COOKIE['__ugate']);
-      unset($_COOKIE['__uanchor']);
-      unset($_COOKIE['__ukey']);
+      setcookie('__ugate', null, time()-1000, '/');
+      setcookie('__uanchor', null, time()-1000, '/');
+      setcookie('__ukey', null, time()-1000, '/');
     }
     private function set_Session(){
       header('Cache-control: private'); 
@@ -162,7 +154,6 @@
       
     }
   }
-
   $Instance = new Login_trigger();
   $Instance->Main();
 ?>

@@ -6,11 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login UMS</title>
-    <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND']. '/resources/bower_components/animate.css/animate.min.css'); ?>" rel="stylesheet">
-    <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND']. '/resources/bower_components/icon-moon/css/icon-moon.css'); ?>" rel="stylesheet">
-    <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND']. '/assets/css/app.min.1.css'); ?>" rel="stylesheet">
+    <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/animate.css/animate.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/icon-moon/css/icon-moon.css'); ?>" rel="stylesheet">
+    <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/assets/css/app.min.1.css'); ?>" rel="stylesheet">
   </head>
   <body class="login-content">
+    <div id="My_Modal" class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Login</h4>
+          </div>
+          <div class="modal-body">
+            <p id="Estado_Modal"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="lc-block toggled" id="l-login">
       <div class="input-group m-b-20">
         <span class="input-group-addon"><i class="icon-user"></i></span>
@@ -31,7 +47,7 @@
           <i class="input-helper"></i>Mantener mi sesión iniciada
         </label>
       </div>
-      <a id="user_login" href="#" class="btn btn-login btn-danger btn-float" tabindex="3">
+      <a id="user_login" href="#" class="btn btn-login btn-danger btn-float" data-toggle="modal" data-target="#myModal" tabindex="3">
         <i class="icon-arrow-right2"></i>
       </a>
     </div>

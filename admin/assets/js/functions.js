@@ -49,7 +49,7 @@ $(document).ready(function(){
                 }, 250);
             }
         });
-        
+
         var Check = $('#UserCheck').is(':checked');
         $('#UserCheck').change(function(){
           Check = $('#UserCheck').is(':checked');
@@ -57,7 +57,9 @@ $(document).ready(function(){
       
         $('#user_login').click(function(e){
           e.preventDefault();
-          var data = {
+          var body  = $("body");
+          var Modal = $('#Estado_Modal');
+          var data  = {
             NameUser:       $('#UserName').val(),
             PasswordUser:   Sha256.hash($('#UserPassword').val()),
             CheckUser:      Check
@@ -71,14 +73,25 @@ $(document).ready(function(){
             contentType:   "application/json; charset=utf-8",
             dataType :     "json",
             beforeSend:    function(response){
-              alert('Enviando datos');
             },
             success:       function(response){
               if(response.Success){
-                window.location.replace("./index.php");
+                Modal.html('Ingresando al sistema....');
+                $('#My_Modal').modal('show');
+                //window.location.replace("./index.php");
               }
               else{
-                alert('Usuario invalido');
+                Modal.html('Error al ingresar al sistema');
+                console.log('Entro');
+                $('#My_Modal').modal('show').on('hide',function(){
+                    console.log('Entro_1');
+                    setTimeout(function(){
+                        console.log('Entro_2');
+                        $('#My_Modal').modal('hide');
+                    }, 5000);
+                });
+
+                
               }
             },
             error:         function(response, error){

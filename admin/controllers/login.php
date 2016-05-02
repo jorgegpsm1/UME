@@ -5,15 +5,7 @@
     private  $Cookies     =   null; 
 
     public function __construct(){
-     /* 
-      $this->Views          =[
-                            'index'      => $_SESSION['BASE_FILE']
-                             ];
-      $this->Controllers    =[
-                             'index'     => $_SESSION['BASE_FILE']
-                             ];
-    */                
-    
+           
     }
     private function is_Session(){
       return (isset($_COOKIE['__ugate']) && isset($_COOKIE['__uanchor']) && isset($_COOKIE['__ukey']))  ?  true : false;
