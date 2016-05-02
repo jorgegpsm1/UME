@@ -78,20 +78,16 @@ $(document).ready(function(){
               if(response.Success){
                 Modal.html('Ingresando al sistema....');
                 $('#My_Modal').modal('show');
-                //window.location.replace("./index.php");
+                setTimeout(function(){
+                    window.location.replace("./index.php");
+                }, 3000);
               }
               else{
                 Modal.html('Error al ingresar al sistema');
-                console.log('Entro');
-                $('#My_Modal').modal('show').on('hide',function(){
-                    console.log('Entro_1');
-                    setTimeout(function(){
-                        console.log('Entro_2');
-                        $('#My_Modal').modal('hide');
-                    }, 5000);
-                });
-
-                
+                $('#My_Modal').modal('show');
+                setTimeout(function(){
+                    $('#My_Modal').modal('hide');
+                }, 3000);   
               }
             },
             error:         function(response, error){

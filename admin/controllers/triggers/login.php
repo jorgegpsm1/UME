@@ -93,7 +93,7 @@
           if(!$this->Response['Success'])
             $this->unset_Session();
           else
-            header("Location: {$_SESSION['BASE_DIR_FRONTEND']}/views/panel.php");
+            header("Location: {$_SESSION['BASE_DIR_FRONTEND']}/controllers/panel.php");
 
           break;
 
