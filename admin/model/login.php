@@ -1,5 +1,5 @@
 <?php
-  require_once(BASE_DIR_BACKEND.'/model/config/database.php');
+  require_once($_SESSION['BASE_DIR_BACKEND'].'/model/config/database.php');
   class Crud{
     private $Connection;
     private $Request;

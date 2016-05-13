@@ -28,15 +28,15 @@
       self::set_Statement();
       switch(self::$Statement){ 
         case '0':
-          require_once(BASE_DIR_BACKEND.'/controller/login.php');
+          require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/login.php');
           $Instance = new Login(self::$Statement);
           $Instance->Main();
           break;
         case '1':
-          require_once(BASE_DIR_BACKEND.'/controller/login.php');
+          require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/login.php');
           break;
         case '2':
-          require_once(BASE_DIR_BACKEND.'/controller/panel.php');
+          require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/panel.php');
           break;
         default:
           break;

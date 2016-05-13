@@ -66,7 +66,7 @@ $(document).ready(function(){
           };
           $.ajax({
             type:          "post",
-            url:           "./controllers/triggers/login.php",
+            url:           "./controller/trigger/login.php",
             async:         true,
             cache:         false,
             data:          JSON.stringify(data),
@@ -91,7 +91,7 @@ $(document).ready(function(){
               }
             },
             error:         function(response, error){
-              alert(" Can't do because: " + error);
+              alert("Error Interno: " + error);
             }  
           });
         return false;  

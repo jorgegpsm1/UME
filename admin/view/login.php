@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login UMS</title>
-    <link href="<?php echo (BASE_DIR_FRONTEND.'/resources/bower_components/animate.css/animate.min.css'); ?>" rel="stylesheet">
-    <link href="<?php echo (BASE_DIR_FRONTEND.'/resources/bower_components/icon-moon/css/icon-moon.css'); ?>" rel="stylesheet">
-    <link href="<?php echo (BASE_DIR_FRONTEND.'/assets/css/app.min.1.css'); ?>" rel="stylesheet">
+    <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/animate.css/animate.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/icon-moon/css/icon-moon.css'); ?>" rel="stylesheet">
+    <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/assets/css/app.min.1.css'); ?>" rel="stylesheet">
   </head>
   <body class="login-content">
     <div id="My_Modal" class="modal fade" id="myModal" role="dialog">
@@ -51,10 +51,10 @@
         <i class="icon-arrow-right2"></i>
       </a>
     </div>
-    <script src="<?php echo (BASE_DIR_FRONTEND.'/resources/bower_components/jquery/dist/jquery.min.js'); ?>"></script>
-    <script src="<?php echo (BASE_DIR_FRONTEND.'/resources/bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
-    <script src="<?php echo (BASE_DIR_FRONTEND.'/resources/bower_components/Waves/dist/waves.min.js'); ?>"></script>
-    <script src="<?php echo (BASE_DIR_FRONTEND.'/assets/js/functions.js'); ?>"></script>
-    <script src="<?php echo (BASE_DIR_FRONTEND.'/assets/js/sha.js'); ?>"></script>
+    <script src="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/jquery/dist/jquery.min.js'); ?>"></script>
+    <script src="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/Waves/dist/waves.min.js'); ?>"></script>
+    <script src="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/assets/js/functions.js'); ?>"></script>
+    <script src="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/assets/js/sha.js'); ?>"></script>
   </body>
 </html>

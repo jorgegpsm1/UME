@@ -1,6 +1,6 @@
 <?php
   @session_start();
-  require_once(BASE_DIR_BACKEND.'/model/login.php');
+  require_once($_SESSION['BASE_DIR_BACKEND'].'/model/login.php');
   class Login_trigger{
     private $Request;
     private $Response;
