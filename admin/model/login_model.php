@@ -1,23 +1,22 @@
 <?php
   require_once($_SESSION['BASE_DIR_BACKEND'].'/model/config/database.php');
-  class Crud{
+  class Login_Model{
     private $Connection;
     private $Request;
     private $Response;
     private $Query;
     
     public function __construct(){
-      $this->Connection   = Database::connect();
+      $this->Connection   = Database::Connect();
     }
     private function set_Query(){
       $this->Query        = null;
-      switch ($this->Request['Action']){
+      switch ($_SESSION['ACTION']){
         case '1':
-          $this->Query['SQL_A']       = "SELECT ID_USER AS ID, USER_LOGIN AS USER, USER_PASS AS PASS FROM USER";
+          $this->Query['SQL_A']       = "SELECT ID_USER, USER_LOGIN_NAME, USER_LOGIN_PASS, USER_STATUS  FROM USER_ACCESS";
           break;
-
         case '1.1':
-          $this->Query['SQL_A']       = "SELECT ID_USER AS ID, USER_SESSIONS AS SESSIONS, USER_SESSION_KEY AS SESSION_KEY FROM USER_MULTIPLE";
+          $this->Query['SQL_A']       = "SELECT ID_SESSION,  FROM USER_SESSION_ACCESS";
           $this->Query['SQL_B']       = "UPDATE  USER_MULTIPLE SET USER_SESSIONS = :SESSIONS WHERE ID_USER = :ID";
           break;
 
@@ -44,7 +43,7 @@
     }
     private function set_Response(){
       $this->Response   = null;
-      switch($this->Request['Action']){ 
+      switch($_SESSION['ACTION']){ 
         case '1':
           try{
             $this->Response['Success'] = false;
@@ -84,7 +83,6 @@
                 break;
                 }
               }
-
             $result_2->bindParam(':ID',$this->Response['ID']);
             $result_2->bindParam(':SESSIONS',$this->Response['Sessions']);
             $result_2->execute();
@@ -144,7 +142,7 @@
       }
     }
     public function __destruct(){
-      Database::disconnect();
+      Database::Disconnect();
     }
   }
 ?>

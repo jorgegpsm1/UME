@@ -10,7 +10,7 @@
     public function __construct(){
       die('No se instancian objetos');
     }
-    public static function connect(){
+    public static function Connect(){
       if(null == self::$count){
         try{
           self::$count = new PDO("mysql:host=".self::$dbHost.";"."dbname=".self::$dbName,self::$dbUserName,self::$dbUserPassword);
@@ -22,7 +22,7 @@
       }
       return self::$count;
     }
-    public static function disconnect(){
+    public static function Disconnect(){
       self::$count = null;
     }
   }
