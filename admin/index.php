@@ -1,8 +1,8 @@
 <?php
   /*
 	* @Proyecto	UME
-	* @Version Ajax
-	* @Autor	Jorge Garcia
+	* @Version 	Ajax
+	* @Autor		Jorge Garcia
 	* @Version	1.0
 	*/
 

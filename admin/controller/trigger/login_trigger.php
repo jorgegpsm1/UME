@@ -5,14 +5,14 @@
   class Login_Trigger{
     private $Request;
     private $Response;
+    private $Action;
     private $CRUD;
 
     public function __construct(){
-      $this->CRUD = new Login_Model(); 
-      echo "Constructor"; 
+      $this->Action = $_SESSION['ACTION'];
     }
     private function get_Request(){
-      switch ($_SESSION['ACTION']){
+      switch ($this->Action){
         case '1':
           $this->Request = null;
           $Json = file_get_contents('php://input');
@@ -22,7 +22,8 @@
             $this->Request['NameUser']          = stripslashes(strip_tags(htmlspecialchars(trim($this->Request['NameUser']))));
             $this->Request['PasswordUser']      = stripslashes(strip_tags(htmlspecialchars(trim($this->Request['PasswordUser']))));
             $this->Request['CheckUser']         = stripslashes(strip_tags(htmlspecialchars(trim($this->Request['CheckUser']))));
-            $this->Request['PasswordUser']      = $this->Request['NameUser'].'?'.$this->Request['PasswordUser'].'?'.'0';
+            $this->Request['PasswordUser']      = $this->Request['NameUser'].'?'.$this->Request['PasswordUser'].'?'.'uralvasm';
+            $this->Request['Action']            = $this->Action;
             $this->Response                     = null; 
           }
           else{
@@ -31,13 +32,17 @@
           break;
         case '1.1':
           $this->Request['ID']                = $this->Response['ID'];
+          $this->Request['Action']            = $this->Action;
           $this->Response                     = null; 
         break;
 
         case '1.2':
-          $this->Request['Sessions']          = $this->Response['Sessions'];
-          $this->Request['Keys']              = sha1(sha1($this->Request['NameUser'].'?'.$this->Request['ID']).'?'.$this->Response['Sessions']);
+          $this->Request['Sessions']          = $this->Response['Session'];
+          $this->Request['Key']               = sha1(sha1($this->Request['NameUser'].'?'.$this->Request['ID']).'?'.$this->Request['Sessions']);
+          $this->Request['Ip']                = "192.168.0.{Random(0,254)}";
+          $this->Request['Browser']           = 'Chrome'; 
           $this->Request['Temp']              = (!$this->Request['CheckUser']);
+          $this->Request['Action']            = $this->Action;
           $this->Response                     = null; 
         break;
 
@@ -47,6 +52,7 @@
             $this->Request['__uanchor']         = stripslashes(strip_tags(htmlspecialchars(trim($this->Request['__uanchor']))));
             $this->Request['__ugate']           = stripslashes(strip_tags(htmlspecialchars(trim($this->Request['__ugate']))));
             $this->Request['__ukey']            = stripslashes(strip_tags(htmlspecialchars(trim($this->Request['__ukey']))));
+            $this->Request['Action']            = $this->Action;
             $this->Response                     = null; 
           }
           else{
@@ -58,17 +64,17 @@
       }
     }
     private function set_Response(){
-      switch ($_SESSION['ACTION']){
+      switch ($this->Action){
         case '1':
+          $this->CRUD     = new Login_Model(); 
           $this->Response = $this->CRUD->get_Response($this->Request);
 
           if($this->Response['Success']){
-            $_SESSION['ACTION'] = '1.1';
+            $this->Action = '1.1';
             $this->get_Request();
             $this->Response = $this->CRUD->get_Response($this->Request);
             if($this->Response['Success']){
-              
-              $_SESSION['ACTION'] = '1.2';
+              $this->Action = '1.2';
               $this->get_Request();
               $this->Response = $this->CRUD->get_Response($this->Request);
 
@@ -85,6 +91,7 @@
           break;
 
         case '2':
+          $this->CRUD   = new Login_Model(); 
           $this->Response = $this->CRUD->get_Response($this->Request);
           if(!$this->Response['Success'])
             $this->unset_Session();
@@ -133,25 +140,12 @@
       setcookie('__ukey',$this->Request['Keys'],time() + $cookie_time, '/');
     }
     public function Initialize(){    
-      switch ($_SESSION['ACTION']){
-        case '1':
-          $this->get_Request();
-          $this->set_Response();
-          break;
-        case '2':
-          $this->get_Request();
-          $this->set_Response();
-          break;
-        default:
-          break;
-      }
+      $this->get_Request();
+      $this->set_Response();
     }
     public function __destruct(){
-      
     }
   }
-  if($_SESSION['ACTION'] ==  1){
-    $Instance = new Login_Trigger();
-    $Instance->Initialize();
-  }
+  $Instance = new Login_Trigger();
+  $Instance->Initialize();
 ?>

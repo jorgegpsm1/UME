@@ -1,27 +1,28 @@
 <?php
   require_once($_SESSION['BASE_DIR_BACKEND'].'/model/config/database.php');
   class Login_Model{
-    private $Connection;
     private $Request;
     private $Response;
+    private $Connection;
     private $Query;
+    private $Action;
     
     public function __construct(){
       $this->Connection   = Database::Connect();
     }
     private function set_Query(){
-      $this->Query        = null;
-      switch ($_SESSION['ACTION']){
+      switch ($this->Action){
         case '1':
           $this->Query['SQL_A']       = "SELECT ID_USER, USER_LOGIN_NAME, USER_LOGIN_PASS, USER_STATUS  FROM USER_ACCESS";
           break;
         case '1.1':
-          $this->Query['SQL_A']       = "SELECT ID_SESSION,  FROM USER_SESSION_ACCESS";
-          $this->Query['SQL_B']       = "UPDATE  USER_MULTIPLE SET USER_SESSIONS = :SESSIONS WHERE ID_USER = :ID";
+          $this->Query['SQL_A']       = "SELECT USER_SESSIONS,  FROM USER_SESSION_ACCESS";
+          $this->Query['SQL_B']       = "UPDATE USER_SESSION_ACCESS SET USER_SESSIONS = :SESSION WHERE ID_USER = :ID";
           break;
 
         case '1.2':
-          $this->Query['SQL_A']       = "INSERT INTO USER_MULTIPLE_ACCESS_{$this->Request['ID']} (ID_SESSION, USER_KEY, USER_TEMP) VALUES (:SESSION, :KEYS, :TEMP)";
+          $this->Query['SQL_A']       = "INSERT INTO USER_SESSIONS_ACCESS_{$this->Request['ID']} (ID_SESSION, USER_KEY, USER_DATE_CREATED, USER_DATE_CURRENT, USER_DATE_TEMP, USER_IP, USER_BROWSER, USER_SESSION_TEMP) 
+                                                                                          VALUES (:SESSION, :KEY, :IP, :BROWSER, :SESSION_TEMP)";
           break;
 
         case '2':
@@ -33,7 +34,10 @@
       }
     }
     private function get_Request($Request){
-      $this->Request = $Request;
+      $this->Request    = $Request;
+      $this->Response   = null;
+      $this->Query      = null;
+      $this->Action     = $this->Request['Action'];
     }
     public function get_Response($Input){
       $this->get_Request($Input);
@@ -42,18 +46,18 @@
       return $this->Response;
     }
     private function set_Response(){
-      $this->Response   = null;
-      switch($_SESSION['ACTION']){ 
+      switch($this->Action){ 
         case '1':
           try{
             $this->Response['Success'] = false;
-            $result = $this->Connection->prepare($this->Query['SQL_A']);
-            $result->execute();
-            while($row = $result->fetch(PDO::FETCH_ASSOC)){
-              if($row['USER'] == $this->Request['NameUser']){
-                if(password_verify($this->Request['PasswordUser'],$row['PASS'])){
+            $result_1 = $this->Connection->prepare($this->Query['SQL_A']);
+            $result_1->execute();
+            while($row = $result_1->fetch(PDO::FETCH_ASSOC)){
+              if($row['USER_LOGIN_NAME'] == $this->Request['NameUser']){
+                if(password_verify($this->Request['PasswordUser'],$row['USER_LOGIN_PASS']) && $row['USER_STATUS'] == 1){
+                  echo "Entro Pass";
                   $this->Response['Success'] = true;
-                  $this->Response['ID']   = $row['ID'];
+                  $this->Response['ID']   = $row['ID_USER'];
                   break;
                 }
               }
@@ -72,21 +76,19 @@
           try{
             $result_1 = $this->Connection->prepare($this->Query['SQL_A']);
             $result_2 = $this->Connection->prepare($this->Query['SQL_B']);
-
             $result_1->execute();
             while($row = $result_1->fetch(PDO::FETCH_ASSOC)){
-              if($row['ID'] == $this->Request['ID']){
-                $this->Response['ID']       = $row['ID'];
-                $this->Response['Sessions'] = $row['SESSIONS'];
-                $this->Response['Key']      = $row['SESSION_KEY'];
-                $this->Response['Sessions']+=1;
+              if($row['ID_USER'] == $this->Request['ID']){
+                $this->Response['ID']       = $row['ID_USER'];
+                $this->Response['Session']  = $row['USER_SESSIONS'];
+                $this->Response['Key']      = $row['USER_SESSION_PASS'];
+                $this->Response['Session']+=1;
                 break;
                 }
               }
             $result_2->bindParam(':ID',$this->Response['ID']);
-            $result_2->bindParam(':SESSIONS',$this->Response['Sessions']);
+            $result_2->bindParam(':SESSION',$this->Response['Session']);
             $result_2->execute();
-
             $this->Response['Success']  = true;
           }
           catch(PDOException $e){
@@ -99,12 +101,13 @@
         case '1.2':
           try{
             $this->Response['Success'] = false;
-            $result = $this->Connection->prepare($this->Query['SQL_A']);
-            $result->bindParam(':SESSION',$this->Request['Sessions']);
-            $result->bindParam(':KEYS',$this->Request['Keys']);
-            $result->bindParam(':TEMP',$this->Request['Temp']);
-            $result->execute();
-
+            $result_1 = $this->Connection->prepare($this->Query['SQL_A']);
+            $result_1->bindParam(':SESSION',$this->Request['Sessions']);
+            $result_1->bindParam(':KEY',$this->Request['Key']);
+            $result_1->bindParam(':IP',$this->Request['Ip']);
+            $result_1->bindParam(':BROWSER',$this->Request['Browser']);
+            $result_1->bindParam(':SESSION_TEMP',$this->Request['Temp']);
+            $result_1->execute();
             $this->Response['Success']  = true;
           }
           catch(PDOException $e){
