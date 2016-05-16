@@ -6,39 +6,32 @@
       die('No se instancian objetos');
     }
     private static function is_Cookies(){
-      return (isset($_COOKIE['__ugate']) && isset($_COOKIE['__uanchor']) && isset($_COOKIE['__ukey']))  ?  1 : 0;
+      return (isset($_COOKIE['__ugate']) && isset($_COOKIE['__uanchor']) && isset($_COOKIE['__ukey']))  ?  '2' : '1';
     }
-    private static function is_Session(){
-      return (isset($_SESSION['ID']) && isset($_SESSION['SESSION']))  ?  1 : 0;
+    private static function check_Session(){
+      self::unset_Action();
+      $_SESSION['ACTION'] = isset($_SESSION['ID']) ? '3' : self::is_Cookies();
     }
-    private static function set_Action(){
-      if(self::is_Session()){
-        $_SESSION['ACTION'] = '3';
-        echo "SESSION".$_SESSION['ACTION'];
-      }
-      elseif(self::is_Cookies()){
-        $_SESSION['ACTION'] = '2';
-        echo "SESSION".$_SESSION['ACTION'];
-      }
-      else{
-        $_SESSION['ACTION'] = '1';
-        echo "SESSION".$_SESSION['ACTION'];
-      }
+    private static function unset_Action(){
+      unset($_SESSION['ACTION']);
     }
     public static function Initialize(){
-      self::set_Action();
-      echo "SESSION".$_SESSION['ACTION'];
+      self::check_Session();
       switch($_SESSION['ACTION']){ 
-        case ('1' || '2'):
+        case ('1'):
+          require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/login_controller.php');
+          $Instance = new Login_Controller();
+          $Instance->Initialize();
+          break;
+        case ('2'):
           require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/login_controller.php');
           $Instance = new Login_Controller();
           $Instance->Initialize();
           break;
         case '3':
-          var_dump($_SESSION);
-          /*require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/panel_controller.php');
-          $Instance = new Login_Controller();
-          $Instance->Main();*/
+          require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/panel_controller.php');
+          $Instance = new Panel_Controller();
+          $Instance->Initialize();
           break;
         default:
           break;

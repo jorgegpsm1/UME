@@ -29,7 +29,7 @@
           else{
             die("Error Interno");
           }
-          break;
+        break;
         case '1.1':
           $this->Request['ID']                = $this->Response['ID'];
           $this->Request['Action']            = $this->Action;
@@ -59,6 +59,7 @@
             die("Error Interno");
           }
           break;
+
         default:
           break;
       }
@@ -98,7 +99,9 @@
             $this->unset_Session();
           else{
             unset($this->CRUD);
+            $_SESSION['ID']  = $_COOKIE['__ugate'];
             header("Location: {$_SESSION['BASE_DIR_FRONTEND']}/index.php");
+            exit();
           }
           break;
 
@@ -124,7 +127,7 @@
       header('Cache-Control: post-check=0, pre-check=0', false); 
       header('Pragma: no-cache');
 
-      $cookie_time = (60 * 20);
+      $cookie_time = (10 * 365 * 24 * 60 * 60);
       setcookie('__ugate',$this->Request['ID'],time() + $cookie_time, '/');
       setcookie('__uanchor',$this->Request['Sessions'],time() + $cookie_time, '/');
       setcookie('__ukey',$this->Request['Key'],time() + $cookie_time, '/');
