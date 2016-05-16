@@ -79,7 +79,7 @@ $(document).ready(function(){
                 Modal.html('Ingresando al sistema....');
                 $('#My_Modal').modal('show');
                 setTimeout(function(){
-                    //window.location.replace("./index.php");
+                    window.location.replace("./index.php");
                 }, 3000);
               }
               else{

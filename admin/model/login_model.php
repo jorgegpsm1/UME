@@ -16,17 +16,17 @@
           $this->Query['SQL_A']       = "SELECT ID_USER, USER_LOGIN_NAME, USER_LOGIN_PASS, USER_STATUS  FROM USER_ACCESS";
           break;
         case '1.1':
-          $this->Query['SQL_A']       = "SELECT USER_SESSIONS,  FROM USER_SESSION_ACCESS";
+          $this->Query['SQL_A']       = "SELECT ID_USER, USER_SESSIONS, USER_SESSION_PASS FROM USER_SESSION_ACCESS";
           $this->Query['SQL_B']       = "UPDATE USER_SESSION_ACCESS SET USER_SESSIONS = :SESSION WHERE ID_USER = :ID";
           break;
 
         case '1.2':
-          $this->Query['SQL_A']       = "INSERT INTO USER_SESSIONS_ACCESS_{$this->Request['ID']} (ID_SESSION, USER_KEY, USER_DATE_CREATED, USER_DATE_CURRENT, USER_DATE_TEMP, USER_IP, USER_BROWSER, USER_SESSION_TEMP) 
+          $this->Query['SQL_A']       = "INSERT INTO USER_SESSIONS_ACCESS_{$this->Request['ID']} (ID_SESSION, USER_KEY, USER_IP, USER_BROWSER, USER_SESSION_TEMP) 
                                                                                           VALUES (:SESSION, :KEY, :IP, :BROWSER, :SESSION_TEMP)";
           break;
 
         case '2':
-          $this->Query['SQL_A']       = "SELECT  ID_SESSION AS SESSION, USER_KEY AS PASS FROM  USER_MULTIPLE_ACCESS_{$this->Request['__ugate']}";
+          $this->Query['SQL_A']       = "SELECT  ID_SESSION, USER_KEY FROM  USER_SESSIONS_ACCESS_{$this->Request['__ugate']}";
           break;
 
         default:
@@ -55,7 +55,6 @@
             while($row = $result_1->fetch(PDO::FETCH_ASSOC)){
               if($row['USER_LOGIN_NAME'] == $this->Request['NameUser']){
                 if(password_verify($this->Request['PasswordUser'],$row['USER_LOGIN_PASS']) && $row['USER_STATUS'] == 1){
-                  echo "Entro Pass";
                   $this->Response['Success'] = true;
                   $this->Response['ID']   = $row['ID_USER'];
                   break;
@@ -124,8 +123,8 @@
             $result = $this->Connection->prepare($this->Query['SQL_A']);
             $result->execute();
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
-              if($row['SESSION'] == $this->Request['__uanchor']){
-                if($row['PASS'] == $this->Request['__ukey']){
+              if($row['ID_SESSION'] == $this->Request['__uanchor']){
+                if($row['USER_KEY'] == $this->Request['__ukey']){
                   $this->Response['Success']  = true;
                   break;
                 }

@@ -14,19 +14,20 @@
     private static function set_Action(){
       if(self::is_Session()){
         $_SESSION['ACTION'] = '3';
-        return;
+        echo "SESSION".$_SESSION['ACTION'];
       }
-      elseif(self::is_Cookies()) {
+      elseif(self::is_Cookies()){
         $_SESSION['ACTION'] = '2';
-        return;
+        echo "SESSION".$_SESSION['ACTION'];
       }
       else{
         $_SESSION['ACTION'] = '1';
-        return;
+        echo "SESSION".$_SESSION['ACTION'];
       }
     }
     public static function Initialize(){
       self::set_Action();
+      echo "SESSION".$_SESSION['ACTION'];
       switch($_SESSION['ACTION']){ 
         case ('1' || '2'):
           require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/login_controller.php');
@@ -34,9 +35,10 @@
           $Instance->Initialize();
           break;
         case '3':
-          require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/panel_controller.php');
+          var_dump($_SESSION);
+          /*require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/panel_controller.php');
           $Instance = new Login_Controller();
-          $Instance->Main();
+          $Instance->Main();*/
           break;
         default:
           break;

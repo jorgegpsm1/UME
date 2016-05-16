@@ -78,11 +78,12 @@
               $this->get_Request();
               $this->Response = $this->CRUD->get_Response($this->Request);
 
-            if($this->is_Autologin())
-              $this->set_Session();       
-            else
-              $this->set_Session_temp();
-              
+              if($this->is_Autologin()){
+                $this->set_Session();       
+              }
+              else{
+                $this->set_Session_temp();
+              }
             }
           }
           unset($this->CRUD);
@@ -95,9 +96,10 @@
           $this->Response = $this->CRUD->get_Response($this->Request);
           if(!$this->Response['Success'])
             $this->unset_Session();
-          else
-            header("Location: {$_SESSION['BASE_DIR_FRONTEND']}/controllers/panel.php");
-
+          else{
+            unset($this->CRUD);
+            header("Location: {$_SESSION['BASE_DIR_FRONTEND']}/index.php");
+          }
           break;
 
         default:
@@ -122,10 +124,10 @@
       header('Cache-Control: post-check=0, pre-check=0', false); 
       header('Pragma: no-cache');
 
-      $cookie_time = (10 * 365 * 24 * 60 * 60);
+      $cookie_time = (60 * 20);
       setcookie('__ugate',$this->Request['ID'],time() + $cookie_time, '/');
       setcookie('__uanchor',$this->Request['Sessions'],time() + $cookie_time, '/');
-      setcookie('__ukey',$this->Request['Keys'],time() + $cookie_time, '/');
+      setcookie('__ukey',$this->Request['Key'],time() + $cookie_time, '/');
     }
     private function set_Session_temp(){
       header('Cache-control: private'); 
@@ -137,7 +139,7 @@
       $cookie_time = (60 * 20);
       setcookie('__ugate',$this->Request['ID'],time() + $cookie_time, '/');
       setcookie('__uanchor',$this->Request['Sessions'],time() + $cookie_time, '/');
-      setcookie('__ukey',$this->Request['Keys'],time() + $cookie_time, '/');
+      setcookie('__ukey',$this->Request['Key'],time() + $cookie_time, '/');
     }
     public function Initialize(){    
       $this->get_Request();
