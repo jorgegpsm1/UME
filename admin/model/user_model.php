@@ -1,18 +1,20 @@
 <?php
-  require_once($_SESSION['BASE_DIR_BACKEND'].'/model/login_model.php'); 
-  class User_Cccess{
+  require_once($_SESSION['BASE_DIR_BACKEND'].'/model/config/database.php');
+
+  class User_Model{
     private $Request;
     private $Response;
+    private $Connection;
+    private $Query;
     private $Action;
-    private $CRUD;
 
     public function __construct(){
+      $this->Connection   = Database::Connect();
     }
-    private function get_Response(){
+    private function get_Request(){
     }
     private function set_Response(){
-      $this->Request['Departament'] = array();
-      $this->Request['Departament']['User_access'] = array();
+
     }
     public function Initialize(){    
       switch($_SESSION['ACTION_USER']){
@@ -25,6 +27,8 @@
       }
     }
     public function __destruct(){
+      Database::Disconnect();
     }
   }
 ?>
+

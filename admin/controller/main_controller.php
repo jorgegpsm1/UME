@@ -8,15 +8,11 @@
     private static function is_Cookies(){
       return (isset($_COOKIE['__ugate']) && isset($_COOKIE['__uanchor']) && isset($_COOKIE['__ukey']))  ?  '2' : '1';
     }
-    private static function check_Session(){
-      self::unset_Action();
+    private static function is_Session(){
       $_SESSION['ACTION'] = isset($_SESSION['ID']) ? '3' : self::is_Cookies();
     }
-    private static function unset_Action(){
-      unset($_SESSION['ACTION']);
-    }
     public static function Initialize(){
-      self::check_Session();
+      self::is_Session();
       switch($_SESSION['ACTION']){ 
         case ('1'):
           require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/login_controller.php');
