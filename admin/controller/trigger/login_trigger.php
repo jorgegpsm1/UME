@@ -99,8 +99,8 @@
             $this->unset_Session();
           else{
             unset($this->CRUD);
-            $_SESSION['ID']       = $_COOKIE['__uanchor'];
-            $_SESSION['SESSION']  = $_COOKIE['__ugate'];
+            $_SESSION['ID']       = $_COOKIE['__ugate'];
+            $_SESSION['SESSION']  = $_COOKIE['__uanchor'];
             header("Location: {$_SESSION['BASE_DIR_FRONTEND']}/index.php");
             exit();
           }
