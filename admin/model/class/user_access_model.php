@@ -27,6 +27,7 @@
 
         case '2.1':
           return ("SELECT USER_DEPARTMENT_STATUS FROM DEPARTMENT_AREA_USER_ACCESS_{$KEY_1}_{$KEY_2} WHERE ID_USER = {$_SESSION['ID']}");
+
           break;
 
       case '3':
@@ -43,7 +44,7 @@
     }
     public function get_Response(){
       $this->set_Response();
-      return $this->Response;   
+      return array($this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER'],$this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER_ACCESS']);
     }
     private function set_Response(){
       switch($this->Action){
@@ -64,12 +65,12 @@
 
           $this->Action = '1.1';
           $Count = count($this->Response['DEPARTMENT']['DEPARTMENT_ACCESS']);
-          for($x=1; $x<=$Count; $x++){
-            $result = $this->Connection->prepare($this->set_Query($x));
+          for($x=0; $x<$Count; $x++){
+            $result = $this->Connection->prepare($this->set_Query($this->Response['DEPARTMENT']['DEPARTMENT_ACCESS'][$x]));
             $result->execute();
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
               if($row['USER_DEPARTMENT_STATUS'] == 1){
-                array_push($this->Response['DEPARTMENT']['DEPARTMENT_USER_ACCESS'],$x);
+                array_push($this->Response['DEPARTMENT']['DEPARTMENT_USER_ACCESS'],$this->Response['DEPARTMENT']['DEPARTMENT_ACCESS'][$x]);
               }
             }
           }
@@ -81,6 +82,7 @@
           $this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER'] = array();
           $this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER_ACCESS'] = array();
           $Count = count($this->Response['DEPARTMENT']['DEPARTMENT_USER_ACCESS']);
+
           for($x=0; $x<$Count; $x++){
             $this->Response['DEPARTMENT']['AREA_TEMP'] = array();
             $result = $this->Connection->prepare($this->set_Query($this->Response['DEPARTMENT']['DEPARTMENT_USER_ACCESS'][$x]));
@@ -99,42 +101,27 @@
 
           $this->Action = '2.1';
           $Count_x = count($this->Response['DEPARTMENT']['DEPARTMENT_AREA']);
-          $Count_y = count($this->Response['DEPARTMENT']['DEPARTMENT_AREA_ACCESS']);
-          if(is_array($this->Response['DEPARTMENT']['DEPARTMENT_AREA_ACCESS'][1])){
-            foreach($this->Response['DEPARTMENT']['DEPARTMENT_AREA_ACCESS'] as $key) {
-              $Count_y=count($key);
-            }
-          }
-          echo "<br>";
-          echo $Count_x;
-          echo "<br>";
-          echo $Count_y;
-          echo "<br>";
-          /*
+          
           for($x=0; $x<$Count_x; $x++){
-            for($y=0; $x<$Count_y; $x++){
-              $result = $this->Connection->prepare($this->set_Query($this->Response['DEPARTMENT']['DEPARTMENT_AREA'][$x]),$this->Response['DEPARTMENT']['DEPARTMENT_AREA_ACCESS'][$y]));
-              $result->execute();
-              while($row = $result->fetch(PDO::FETCH_ASSOC)){
-                if($row['USER_DEPARTMENT_STATUS'] == 1){
-                  array_push($this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER_ACCESS'],$this->Response['DEPARTMENT']['DEPARTMENT_AREA_ACCESS'][$y]);
+            $this->Response['DEPARTMENT']['AREA_TEMP'] = array();
+              foreach($this->Response['DEPARTMENT']['DEPARTMENT_AREA_ACCESS'][$x] as $key){
+                $this->Response['DEPARTMENT']['AREA_TEMP'] = array();
+                $result = $this->Connection->prepare($this->set_Query($this->Response['DEPARTMENT']['DEPARTMENT_AREA'][$x],$key));
+                $result->execute();
+                while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                  if($row['USER_DEPARTMENT_STATUS'] == 1){
+                    array_push($this->Response['DEPARTMENT']['AREA_TEMP'],$key);
+                  }
+                }
+                if(!empty($this->Response['DEPARTMENT']['AREA_TEMP'])){
+                  array_push($this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER_ACCESS'],$this->Response['DEPARTMENT']['AREA_TEMP']);
                 }
               }
-            }
+              if(!empty($this->Response['DEPARTMENT']['AREA_TEMP'])){
+                  array_push($this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER'],$this->Response['DEPARTMENT']['DEPARTMENT_AREA'][$x]);
+              }
           }
-          //$result->closeCursor();
-/*
-          echo "Departamento Usuario Accesso";
-          echo "<br>";
-          var_dump($this->Response['DEPARTMENT']['DEPARTMENT_USER_ACCESS']);
-          echo "<br>";
-          echo "Departamento AREA";
-          echo "<br>";
-          var_dump($this->Response['DEPARTMENT']['DEPARTMENT_AREA']);
-          echo "<br>";
-          var_dump($this->Response['DEPARTMENT']['DEPARTMENT_AREA_ACCESS']);
-          echo "<br>";
-          */
+          $result->closeCursor();
         }
         catch(PDOException $e){
             echo "DataBase Error: The user could not be added.<br>".$e->getMessage();
