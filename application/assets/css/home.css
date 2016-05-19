@@ -624,8 +624,8 @@ h6 {
     border: 0px;
     border-right: 1px solid#eee;
 	height: 350px;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	overflow: scroll;
+	overflow: hidden x;
 }
 #service-tab-wrapper.nav-tabs > li > a {
     margin-right: 2px;

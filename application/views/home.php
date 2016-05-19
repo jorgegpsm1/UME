@@ -6,21 +6,21 @@
     <meta name="Pablo Pérez" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <link rel="shortcut icon" href="../assets/favicon/UMS_logo.ico" type="image/x-icon" />
     <title>Unidad Médica Santé</title>
-    <link rel="shortcut icon" href="../assets/img/UMS_logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../resource/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resource/animate/css/animate.css">
-    <link rel="stylesheet" href="../resource/scrollbar/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" href="../assets/css/home.css">
     <link rel="stylesheet" href="../assets/css/responsive.css">
     <link rel="stylesheet" href="../resource/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../resource/icon-moon/css/icon-moon.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" class="mCustomScrollbar" data-mcs-theme="dark">
+  <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <nav class="navbar navbar-custom navbar-fixed-top" >
       <div class="container">
         <div class="row ">
@@ -31,19 +31,19 @@
                 <i class="fa fa-bars"></i>
               </button>
               <a class="navbar-brand page-scroll" href="#page-top">
-                <img src="../assets/img/UMS_logo.png" alt="tu mama" style="width:20px;">UMS
+                <i class="icon-aid-kit"></i>UMS
               </a>
               </div>
               <div class="collapse navbar-collapse  navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                  <li class="active"><a href="#section-slider">Inicio</a></li>
-                  <li><a class="page-scroll" href="#section-feature">Acerca de</a></li>
-                  <li><a class="page-scroll" href="#section-service">Especialidades</a></li>
-                  <li><a class="page-scroll" href="#section-catalogue">Catalogo</a></li>
-                  <li><a class="page-scroll" href="#section-contact-info">Contacto</a></li>
+                  <li class="active"><a href="#section-slider"  >Inicio</a></li>
+                  <li><a class="page-scroll" href="#section-feature" >Acerca de</a></li>
+                  <li><a class="page-scroll" href="#section-service"  >Especialidades</a></li>
+                <?php /*  <li><a class="page-scroll" href="#section-catalogue" >Catalogo</a></li> */?>
+                  <li><a class="page-scroll" href="#section-contact-info"  >Contacto</a></li>
                 </ul>
                 <div class="contact-no navbar-right visible-md visible-lg">
-                  <i class="fa fa-phone"></i> (33)-38604777
+                  <i class="fa fa-phone"></i>(33)-38604777
                 </div>
               </div>
             </div>
@@ -54,17 +54,20 @@
     <div id="section-slider">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          <div class="col-md-12 text-center">
          	<h1>Unidad Medica Santé <br> <p>Av. Constitución de 1917 #3204 <br> Colonia Fracc. Revolución Tlaquepaque, Jalisco, México</p></h1>
           </div>
         </div>
       </div>
     </div>
+    
+    								<?php /* SECTION PRINCIPAL  */ ?>
+    
     <section id="section-about">
       <div class="container">
         <div class="about-wrapper">
           <div class="row">
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 wow slideInLeft">
+            <div class="col-md-4 col-sm-4 wow slideInLeft">
               <div class="about-inner">
                 <h4> <i class="icon-users"></i> Con gusto le atenderemos</h4>
                 <div align="center">
@@ -78,37 +81,54 @@
                 
               </div>
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 wow slideInRight">
+            <div class="col-md-4 col-sm-4 wow slideInRight">
               <div class="about-inner">
                 <h4> <i class="icon-clock"></i>Horario de Atención</h4>
                 <p align="center">Lunes a Viernes <br> 9:00-14:00 &amp; 16:00-20:00</p>
               </div>
             </div>
-            <div class="hidden-xs col-sm-4 col-md-4 col-lg-4 wow slideInDown">
+            <div class="col-md-4 col-sm-4 wow slideInDown">
               <div class="top-contact">
                 <form role="form" id="contactForm" data-toggle="validator" class="shake" >
                   <div class="header_cita">
                     <h4>Agende su cita</h4>
-                    <p>Ingrese sus datos de contacto</p>
+                    <p>Datos de contacto</p>
                   </div>
                   <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-md-12 col-sm-12">
                       <div class="form-group">
-                        <input type="text" id="name" class="form-control" placeholder="Nombre" autocomplete="off" required data-error="Ingrese su Nombre">
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" autocomplete="off">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-12 col-sm-12">
                       <div class="form-group">
-                        <input type="email" id="email" class="form-control" placeholder="Su correo" autocomplete="off" required data-error="Ingrese su Correo Electrónico">
+                        <input type="text" id="paterno" name="paterno" class="form-control" placeholder="Apellido Paterno" autocomplete="off">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                      <div class="form-group">
+                        <input type="text" id="materno" name="materno" class="form-control" placeholder="Apellido Materno" autocomplete="off">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                      <div class="form-group">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Su correo" autocomplete="off">
                         <div class="help-block with-errors"></div>
                       </div>
                       </div>
                       <div class="col-md-12 col-sm-12">
-                      <div class="form-group">
-                        <input type="tel" id="phone" class="form-control" placeholder="Su telefono" autocomplete="off" required data-error="Ingrese su Teléfono">
-                        <div class="help-block with-errors"></div>
+                        <div class="form-group">
+                          <input type="tel" id="phone" name="phone" class="form-control" placeholder="Su telefono" autocomplete="off">
+                          <div class="help-block with-errors"></div>
+                        </div>
                       </div>
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group" style="color:black">
+                          <input type="text" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM" /><span style="color:white">Agendar Cita</span>
+                        </div>
                       </div>
                   </div>
                   <button class="btn btn-primary white" id="form-submit" type="submit" value="Submit">Agendar</button>
@@ -120,6 +140,9 @@
         </div>
       </div>
     </section>
+    
+    								<?php /* SECTION ACERCA DE  */ ?>
+    
     <section id="section-feature">
       <div class="container">
         <div class="row">
@@ -131,41 +154,41 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+          <div class="col-md-7 ">
             <div class="feature-inner">
               <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center wow slideInDown" data-wow-delay=".2s">
+                <div class="col-md-6 col-sm-6 wow slideInDown" data-wow-delay=".2s">
                   <div class="feature-box">
                     <i class="icon-profile"></i> 
                     <h4>Medicos Especialistas</h4>
-                    <p>Todos nuestros médicos se encuentran certificados, para que usted reciba una grata atención.</p>
+                    <p>Todos nuestros médicos se encuentran calificados para que usted reciba una atención de calidad.</p>
                   </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6  text-center wow slideInDown" data-wow-delay=".4s">
+                <div class="col-md-6 col-sm-6  wow slideInDown" data-wow-delay=".4s">
                   <div class="feature-box">
                     <i class="icon-aid-kit"></i> 
-                    <h4>Equipo Necesario</h4>
+                    <h4>Equipamiento</h4>
                     <p>Cada especialidad cuenta con el equipo necesario para su atención.<br><br></p>
                   </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center wow slideInDown" data-wow-delay=".6s">
+                <div class="col-md-6 col-sm-6  wow slideInDown" data-wow-delay=".6s">
                   <div class="feature-box">
                     <i class="icon-location"></i> 
-                    <h4>Buena Ubicacion</h4>
-                    <p>Nos encontramos en el fraccionamiento revolución.</p>
+                    <h4>Ubicacion</h4>
+                    <p>Nos encontramos en el Fraccionamiento Residencial Revolución.</p>
                   </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center wow slideInDown" data-wow-delay=".8s">
+                <div class="col-md-6 col-sm-6  wow slideInDown" data-wow-delay=".8s">
                   <div class="feature-box">
                     <i class="icon-happy"></i> 
-                    <h4>Atención de Calidad</h4>
-                    <p>Nuestro objetivo es brindarle una atención placentera.</p>
+                    <h4>Objetivo</h4>
+                    <p>Brindarle una atención adecuada a sus necesidades.</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="hidden-xs hidden-sm col-md-5 col-lg-5 feature-slid wow slideInRight">
+          <div class="col-md-5 feature-slide col-sm-12 visible-md visible-lg wow slideInRight">
             <div class="carousel slide" id="feature-slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="item active">
@@ -174,25 +197,29 @@
                 <div class="item">
                   <img src="../assets/img/images/about/medic2.jpg" alt="feature-img2">
                 </div>
+     
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+    
+									<?php /* SECTION SERVICES  */ ?>
+    
     <section id="section-service">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 wow fadeIn">
+          <div class="col-md-12 wow fadeIn">
             <div class="section-heading text-center">
               <h2>Especialidades Medicas</h2>
-              <p>Conosca las especialidades con las que contamos en la unidad.<br><br></p>
+              <p>Conozca las especialidades con las que contamos en la unidad.<br><br></p>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-3 col-sm-4 wow fadeInLeft">
-            <ul class="nav nav-tabs nav-stacked content" role="tablist"  id="service-tab-wrapper">
+            <ul class="nav nav-tabs nav-stacked" role="tablist" id="service-tab-wrapper">
               <li role="presentation" class="active">
                 <a href="#tab_a" class="animated fadeIn"  role="tab" data-toggle="tab">Medicina Fisica y Rehabilitacion</a>
               </li>
@@ -264,12 +291,14 @@
             <div class="col-md-7 col-sm-12">
             <div class="service-desc">
             <h4>Medicina Fisica y Rehabilitacion</h4>
-            <p>Secuelas de Fracturas, Esguinces, Páralisis Facial, Dolores de Espalda, Pie Plano, etc..</p>
+            <p>Secuelas de Fracturas, Esguinces, Páralisis Facial, Dolores de Espalda, Dolores de Cuello, Tendinitis, etc. <br> <br> Certificación en Técnica Gavilán <br> Certificación en Tape Neuromuscular</p>
             <ul class="service-tab-info">
-            <li>Médicos Calificados</li>
-            <li>Ahorra tiempo y dinero</li>
+            <li>Médico Especialista</li>
+            <li>Láser</li>
             <li>Electroestimulación</li>
-            <li>Cabitación</li>
+            <li>Cavitación</li>
+            <li>Parafina</li>
+            <li>Ultrasonido</li>
             </ul>
             </div>
             </div>
@@ -285,12 +314,12 @@
             <div class="col-md-7 col-sm-12">
             <div class="service-desc">
             <h4>Ortopedia</h4>
-            <p>Pie plano, zapatos ortopedicos, plantillas, etc.</p>
+            <p>Pie plano, Pie Cabo, Defectos de Postura, etc.</p>
             <ul class="service-tab-info">
-            <li>Médicos Especialisados</li>
-            <li>Productos Ortopedicos</li>
-            <li>Precios Accesibles</li>
-            <li>Consulta</li>
+            <li>Plantillas</li>
+            <li>Zapatos Ortopédicos</li>
+            <li>Zapatos para Diabético</li>
+            <li>Rodilleras, Fajas, etc.</li>
             </ul>
             </div>
             </div>
@@ -306,12 +335,14 @@
                 <div class="col-md-7 col-sm-12">
                   <div class="service-desc">
                     <h4>Traumatologia</h4>
-                    <p>Fracturas, Luxaciones, Artroscopías, Protesis, Cirugía Articular, etc.</p>
+                    <p>Accidentes y Lesiones Músculo Esqueléticas</p>
                       <ul class="service-tab-info">
-                      <li>Médicos Calificados</li>
-                      <li>Cirugias</li>
-                      <li>Yesos</li>
-                      <li>Protesis</li>
+                      <li>Fracturas</li>
+                      <li>Luxaciones</li>
+                      <li>Esguinces</li>
+                      <li>Cirugía Artroscópica</li>
+                      <li>Reemplazo Articular</li>
+                      <li>Trauma Deportivo</li>
                       </ul>
                     </div>
                 </div>
@@ -327,9 +358,9 @@
                 <div class="col-md-7 col-sm-12">
                   <div class="service-desc">
                     <h4>Ginecologia y Obtetricia</h4>
-                    <p>Control del Embarazo, Papanicolau, Colposcopia, etc.</p>
+                    <p>Control Prenatal, Planificación Familiar, Papanicolau, Colposcopia, etc.</p>
                     <ul class="service-tab-info">
-                      <li>Médicos Calificados</li>
+                      <li>Neoplasias</li>
                       <li>Colposcopia</li>
                       <li>Exploración Mamaria</li>
                       <li>Ecosonograma</li>
@@ -350,10 +381,10 @@
                   <h4>Nefrologia</h4>
                   <p>Enfermedades Renales, Diálisis, Hemodiálisis, Insuficiencia Renal, Hipertension Arterial, etc.</p>
                   <ul class="service-tab-info">
-                    <li>Médicos Calificados</li>
-                      <li>Riñones</li>
-                      <li>Cirugía</li>
-                      <li>Pago</li>
+                      <li>Problemas Inmunológicos</li>
+                      <li>Tratamiento Especializado</li>
+                      <li>Nefropatía Diabética</li>
+                      <li>Infecciones</li>
                   </ul>
                 </div>
               </div>
@@ -369,12 +400,12 @@
                   <div class="col-md-7 col-sm-12">
                     <div class="service-desc">
                       <h4>Pediatria</h4>
-                      <p>Control de Niños Sanos, Crecimiento Normál, Vacunas, Control de Peso, etc..</p>
+                      <p>Control de Niño Sano, Crecimiento Normal, Vacunas, Control de Peso, etc..</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Diarrea</li>
+                          <li>Problemas Urinarios</li>
+                          <li>Fiebre</li>
+                          <li>Problemas Respiratorios</li>
                         </ul>
                     </div>
                   </div>
@@ -392,10 +423,10 @@
                       <h4>Otorrinolaringologia</h4>
                       <p>Tratamiento Médico y Quirúrgico de Oido, Nariz y Garganta.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Adenoides</li>
+                          <li>Rinoplastía</li>
+                          <li>Sinusitis</li>
+                          <li>Alergias</li>
                         </ul>
                     </div>
                   </div>
@@ -411,12 +442,12 @@
                   <div class="col-md-7 col-sm-12">
                     <div class="service-desc">
                       <h4>Cirugia General</h4>
-                      <p>Laparoscopía, Cirugía de Apendice,Cirugía de Vecicula,Cirugía de Tiroides, Cirugía de Intestino, Ernias, etc.</p>
+                      <p>Cirugía de Apendice, Cirugía de Vesícula, Cirugía de Tiroides, Cirugía de Intestino, Hernias, etc.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Laparoscopía</li>
+                          <li>Cuello</li>
+                          <li>Tiroides</li>
+                          <li>Tumores</li>
                         </ul>
                     </div>
                   </div>
@@ -434,10 +465,10 @@
                       <h4>Gastroenterologia</h4>
                       <p>Colitis, Gastritis, Problemas de Esófago, Problemas Gastrointestinales, etc.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Colon Irritable</li>
+                          <li>Hepatopatias</li>
+                          <li>Endoscopía</li>
+                          <li>Colondoscopía</li>
                         </ul>
                     </div>
                   </div>
@@ -455,10 +486,10 @@
                       <h4>Nutricion</h4>
                       <p>Baja de Peso Comiendo Sano.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Obesidad</li>
+                          <li>Control de Diabético</li>
+                          <li>Aumento de Peso</li>
+                          <li>Dietas Especiales</li>
                         </ul>
                     </div>
                   </div>
@@ -476,10 +507,10 @@
                       <h4>Psicologia</h4>
                       <p>Problemas Emocionales, Psicología Infantil, Problemas Familiares, Problemas de Adicciones, etc.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Depresión</li>
+                          <li>Angustia</li>
+                          <li>Terapia de Lenguaje</li>
+                          <li>Niños y Adultos</li>
                         </ul>
                     </div>
                   </div>
@@ -497,10 +528,10 @@
                       <h4>Medicina Familiar</h4>
                       <p>Medicina Preventiva, Control de Diabetes, Hipertensión, etc.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Chequeos Médicos </li>
+                          <li>Diagnóstico</li>
+                          <li>Prevención</li>
+                          <li>Enfermedades Crónicas</li>
                         </ul>
                     </div>
                   </div>
@@ -516,12 +547,12 @@
                   <div class="col-md-7 col-sm-12">
                     <div class="service-desc">
                       <h4>Neurologia</h4>
-                      <p>Dolor de Cabeza, Convulsiones, Migraña, etc.</p>
+                      <p>Atención de Problemas Neurológicos.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Convulsiones</li>
+                          <li>Migraña</li>
+                          <li>Distonías</li>
+                          <li>Malformaciones</li>
                         </ul>
                     </div>
                   </div>
@@ -537,12 +568,12 @@
                   <div class="col-md-7 col-sm-12">
                     <div class="service-desc">
                       <h4>Medicina Interna</h4>
-                      <p>Diabetes, Endocrinopatías, Artritis, Hipertensión, etc.</p>
+                      <p>Tratamiento de Enfermedades Crónico Degenerativas.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Diabetes</li>
+                          <li>Endocrinopatías</li>
+                          <li>Artritis</li>
+                          <li>Hipertensión</li>
                         </ul>
                     </div>
                   </div>
@@ -558,12 +589,10 @@
                   <div class="col-md-7 col-sm-12">
                     <div class="service-desc">
                       <h4>Cirugia Plastica</h4>
-                      <p>Rinoplastia, Lipoescultura, Ingertos Cutaneos, Liposucciones, Lipectomías, Aumento y Disminucion de Gluteos y Busto, etc.</p>
+                      <p>Rinoplastia, Lipoescultura, Injertos Cutáneos, Liposucciones, Lipectomías, Aumento y Disminución de Gluteos y Busto, etc.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Cirugía Estética</li>
+                          <li>Cirugía Funcional</li>
                         </ul>
                     </div>
                   </div>
@@ -579,12 +608,12 @@
                   <div class="col-md-7 col-sm-12">
                     <div class="service-desc">
                       <h4>Hematologia</h4>
-                      <p>Enfermedades de la Sangre, Anemia, Leusemia, Purpura, etc.</p>
+                      <p>Enfermedades de la Sangre, Anemia, Leucemia, Púrpura, etc.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Anemia</li>
+                          <li>Leucemia</li>
+                          <li>Púrpura</li>
+                          <li>Discracias Sanguíneas</li>
                         </ul>
                     </div>
                   </div>
@@ -600,12 +629,12 @@
                   <div class="col-md-7 col-sm-12">
                     <div class="service-desc">
                       <h4>Oncocirugia</h4>
-                      <p>Estudio y Extirpación de Tumores.2</p>
+                      <p>Estudio y Extirpación de Tumores.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Tumores Malignos</li>
+                          <li>Biopsias</li>
+                          <li>Quimioterapia</li>
+                          <li>Radioterapia</li>
                         </ul>
                     </div>
                   </div>
@@ -621,12 +650,10 @@
                   <div class="col-md-7 col-sm-12">
                     <div class="service-desc">
                       <h4>Urologia</h4>
-                      <p>Hiperplastia Prostatica y Cáncer de Próstata, Litiasis Renal, Tratamiento Médico y Quirurgico, Eyaculación Precoz, Disfunción Eréctil, etc.</p>
+                      <p>Hiperplastia Prostatica y Cáncer de Próstata, Litiasis Renal, Eyaculación Precoz, Disfunción Eréctil, etc.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Tratamiento Médico</li>
+                          <li>Tratamiento Quirúrgico</li>
                         </ul>
                     </div>
                   </div>
@@ -644,10 +671,10 @@
                       <h4>Homeopatia</h4>
                       <p>La Mejor Forma de Curar a Tu Familia de Manera Suave, Rápida y Permanente.</p>
                         <ul class="service-tab-info">
-                          <li>Qualified Staff of Doctors</li>
-                          <li>Save your Money and Time</li>
-                          <li>24x7 Emergency Services</li>
-                          <li>Easy &amp; Affordable Billing</li>
+                          <li>Ansiedad</li>
+                          <li>Angustia</li>
+                          <li>Estrés</li>
+                          <li>Depresión</li>
                         </ul>
                     </div>
                   </div>
@@ -814,7 +841,11 @@
         </div>
       </div>
     </section> 
-	*/ ?>
+	
+					*/ ?>				
+    
+    								<?php /* SECTION CONTACT */ ?>
+                                    
      <section id="section-contact-info">
       <div class="container">
         <div class="row">
@@ -863,6 +894,10 @@
         </div>
       </div>
     </section> 
+	
+    
+    							<?php /* SECTION FOOTER  */ ?>
+    
     <section id="section-footer">
       <div class="container">
         <div class="row">
@@ -871,7 +906,7 @@
               <h2 class="footer-logo">Unidad Medica Sante</h2><p>Av. Constitución de 1917 #3204 <br> Col. Fraccionamiento Revolucion <br> 
                 Tlaquepaque, Jalisco, México
               </p>
-              <h6 class="copy">&copy;copyright reserved to themeturn.2015 Edited By Pablo PÉrez</h6>
+              <h6 class="copy">&copy;copyright reserved to themeturn.2016 Edited By Pablo PÉrez Chavira</h6>
             </div>
           </div>
         </div>
@@ -879,13 +914,25 @@
     </section>
     <script src="../resource/jquery/jquery.js"></script>
     <script src="../resource/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../resource/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="../assets/js/validator.min.js"></script>
     <script src="../assets/js/form-scripts.js"></script>
     <script src="../assets/js/jquery.easing.min.js"></script>
     <script src="../assets/js/wow.min.js"></script>
     <script src="../resource/respond/js/respond.js"></script>
     <script src="../assets/js/theme.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('input[name="daterange"]').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY h:mm A'
+            }
+        });
+    });
+  </script>
   </body>
 </html>
 

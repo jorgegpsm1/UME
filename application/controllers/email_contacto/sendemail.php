@@ -22,7 +22,7 @@ $mail->Password = 'FileReader753';                           // SMTP password
 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 587;                                    // TCP port to connect to
 
-$mail->setFrom($mail->Username, 'CLIENTES CONTACTO');
+$mail->setFrom($mail->Username, 'CONTACTO');
 $mail->addAddress('contacto@unidadmedicasante.com.mx'); 
 
 /*$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments

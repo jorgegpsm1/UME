@@ -5,9 +5,6 @@ jQuery(function($) {
 			interval: 10000,
 			pause: false
 		});
-        $(".content").mCustomScrollbar({
-          theme:"dark"
-        });
 	});
 
 	//Ajax contact
