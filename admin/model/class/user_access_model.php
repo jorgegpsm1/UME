@@ -110,18 +110,19 @@
                 $result->execute();
                 while($row = $result->fetch(PDO::FETCH_ASSOC)){
                   if($row['USER_DEPARTMENT_STATUS'] == 1){
-                    array_push($this->Response['DEPARTMENT']['AREA_TEMP'],$key);
+                    $this->Response['DEPARTMENT']['AREA_TEMP'][$x] = array();
+                    array_push($this->Response['DEPARTMENT']['AREA_TEMP'][$x][$key-1],$key);
                   }
                 }
-                if(!empty($this->Response['DEPARTMENT']['AREA_TEMP'])){
-                  array_push($this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER_ACCESS'],$this->Response['DEPARTMENT']['AREA_TEMP']);
-                }
               }
-              if(!empty($this->Response['DEPARTMENT']['AREA_TEMP'])){
+              if(!empty($this->Response['DEPARTMENT']['AREA_TEMP'][$x])){
                   array_push($this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER'],$this->Response['DEPARTMENT']['DEPARTMENT_AREA'][$x]);
               }
           }
           $result->closeCursor();
+          echo "<pre>";
+          print_r($this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER_ACCESS']);
+          echo "</pre>";
         }
         catch(PDOException $e){
             echo "DataBase Error: The user could not be added.<br>".$e->getMessage();
