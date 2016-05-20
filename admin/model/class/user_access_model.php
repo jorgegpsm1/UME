@@ -81,6 +81,7 @@
           $this->Response['DEPARTMENT']['DEPARTMENT_AREA_ACCESS'] = array();
           $this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER'] = array();
           $this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER_ACCESS'] = array();
+          
           $Count = count($this->Response['DEPARTMENT']['DEPARTMENT_USER_ACCESS']);
 
           for($x=0; $x<$Count; $x++){
@@ -103,26 +104,22 @@
           $Count_x = count($this->Response['DEPARTMENT']['DEPARTMENT_AREA']);
           
           for($x=0; $x<$Count_x; $x++){
-            $this->Response['DEPARTMENT']['AREA_TEMP'] = array();
+            $this->Response['DEPARTMENT']['AREA_TEMP'][$x] = array();
               foreach($this->Response['DEPARTMENT']['DEPARTMENT_AREA_ACCESS'][$x] as $key){
-                $this->Response['DEPARTMENT']['AREA_TEMP'] = array();
                 $result = $this->Connection->prepare($this->set_Query($this->Response['DEPARTMENT']['DEPARTMENT_AREA'][$x],$key));
                 $result->execute();
                 while($row = $result->fetch(PDO::FETCH_ASSOC)){
                   if($row['USER_DEPARTMENT_STATUS'] == 1){
-                    $this->Response['DEPARTMENT']['AREA_TEMP'][$x] = array();
-                    array_push($this->Response['DEPARTMENT']['AREA_TEMP'][$x][$key-1],$key);
+                    array_push($this->Response['DEPARTMENT']['AREA_TEMP'][$x], $key);
                   }
                 }
               }
               if(!empty($this->Response['DEPARTMENT']['AREA_TEMP'][$x])){
                   array_push($this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER'],$this->Response['DEPARTMENT']['DEPARTMENT_AREA'][$x]);
+                  array_push($this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER_ACCESS'],$this->Response['DEPARTMENT']['AREA_TEMP'][$x]);
               }
           }
           $result->closeCursor();
-          echo "<pre>";
-          print_r($this->Response['DEPARTMENT']['DEPARTMENT_AREA_USER_ACCESS']);
-          echo "</pre>";
         }
         catch(PDOException $e){
             echo "DataBase Error: The user could not be added.<br>".$e->getMessage();

@@ -16,13 +16,15 @@
       $this->USER_INFO = new User_Info_Model();
       $this->USER_INFO = $this->USER_INFO->get_Response();
     }*/
-    private function get_USER_ACCESS(){
+    private function get_user_access(){
       require_once($_SESSION['BASE_DIR_BACKEND'].'/model/class/user_access_model.php');
       $this->USER_ACCESS = new User_Access_Model();
       $this->USER_ACCESS = $this->USER_ACCESS->get_Response();
-      /*echo "<pre>";
-      print_r($this->USER_ACCESS);
-      echo "</pre>";*/
+    }
+    private function set_view(){
+      require_once($_SESSION['BASE_DIR_BACKEND'].'/model/class/user_access_model.php');
+      $this->USER_ACCESS = new User_Access_Model();
+      $this->USER_ACCESS = $this->USER_ACCESS->get_Response();
     }
     public function Initialize(){
 
