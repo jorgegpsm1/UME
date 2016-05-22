@@ -50,11 +50,32 @@ $(document).ready(function(){
             }
         });
 
+        function cargarContenido(div,URL){
+          $(div).load(URL);
+        }
+
+        $("a[href$='usuarios']").click(function(event){
+            event.preventDefault();
+            cargarContenido(('#content'),'assets/ajax/usuarios.html');
+            return false;
+        });
+
+        $("a[href$='asignaciones']").click(function(event){
+            event.preventDefault();
+            cargarContenido(('#content'),'assets/ajax/asignaciones.html');
+            return false;
+        });
+
+        $("a[href$='expedientes']").click(function(event){
+            event.preventDefault();
+            cargarContenido(('#content'),'assets/ajax/expedientes.html');
+            return false;
+        });
+
         var Check = $('#UserCheck').is(':checked');
         $('#UserCheck').change(function(){
           Check = $('#UserCheck').is(':checked');
         });
-      
         $('#user_login').click(function(e){
           e.preventDefault();
           var body  = $("body");

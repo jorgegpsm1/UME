@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<catalogo>
+
+  <productop>
+    <nombre>Zapatos Ortopedicos</nombre>
+    <url>../assets/img/images/catalogue/zapatorto.jpg</url>
+    <descripcion>Para corregir los pies</descripcion>
+    <precio>800</precio>
+  </productop>
+  
+   <productop>
+    <nombre>Andadera</nombre>
+    <url>../assets/img/images/catalogue/caminador.jpg</url>
+    <descripcion>Para caminar</descripcion>
+    <precio>1000</precio>
+  </productop>
+  
+   <productop>
+    <nombre>Ferula Rodilla</nombre>
+    <url>../assets/img/images/catalogue/ferulacodo.jpg</url>
+    <descripcion>Para las rodillas</descripcion>
+    <precio>300</precio>
+  </productop>
+  
+   <productop>
+    <nombre>Muñequera</nombre>
+    <url>../assets/img/images/catalogue/munequera.jpg</url>
+    <descripcion>Para las muñecas</descripcion>
+    <precio>250</precio>
+  </productop>
+  
+  <producto1>
+    <nombre>Muñequera</nombre>
+    <url>../assets/img/images/catalogue/munequera.jpg</url>
+    <descripcion>Para las muñecas</descripcion>
+    <precio>250</precio>
+  </producto1>
+  
+  <producto1>
+    <nombre>Muñequera</nombre>
+    <url>../assets/img/images/catalogue/munequera.jpg</url>
+    <descripcion>Para las muñecas</descripcion>
+    <precio>250</precio>
+  </producto1>
+  
+  <producto1>
+    <nombre>Muñequera</nombre>
+    <url>../assets/img/images/catalogue/munequera.jpg</url>
+    <descripcion>Para las muñecas</descripcion>
+    <precio>250</precio>
+  </producto1>
+  
+  <producto1>
+    <nombre>Muñequera</nombre>
+    <url>../assets/img/images/catalogue/munequera.jpg</url>
+    <descripcion>Para las muñecas</descripcion>
+    <precio>250</precio>
+  </producto1>
+  
+  <producto2>
+    <nombre>Muñequera</nombre>
+    <url>../assets/img/images/catalogue/munequera.jpg</url>
+    <descripcion>Para las muñecas</descripcion>
+    <precio>250</precio>
+  </producto2>
+  
+  <producto2>
+    <nombre>Muñequera</nombre>
+    <url>../assets/img/images/catalogue/munequera.jpg</url>
+    <descripcion>Para las muñecas</descripcion>
+    <precio>250</precio>
+  </producto2>
+  
+  <producto2>
+    <nombre>Muñequera</nombre>
+    <url>../assets/img/images/catalogue/munequera.jpg</url>
+    <descripcion>Para las muñecas</descripcion>
+    <precio>250</precio>
+  </producto2>
+  
+  <producto2>
+    <nombre>Muñequera</nombre>
+    <url>../assets/img/images/catalogue/munequera.jpg</url>
+    <descripcion>Para las muñecas</descripcion>
+    <precio>250</precio>
+  </producto2>
+  
+</catalogo>

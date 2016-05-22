@@ -2,11 +2,11 @@
 <html lang="es_MX">
   <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="../../favicon.ico" style="image/x-icon"> 
     <meta name="description" content="">
     <meta name="Pablo Pérez" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
-    <link rel="shortcut icon" href="../assets/favicon/UMS_logo.ico" type="image/x-icon" />
     <title>Unidad Médica Santé</title>
     <link rel="stylesheet" href="../resource/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resource/animate/css/animate.css">
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../assets/css/responsive.css">
     <link rel="stylesheet" href="../resource/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../resource/icon-moon/css/icon-moon.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <link rel="stylesheet" href="../resource/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -31,19 +31,19 @@
                 <i class="fa fa-bars"></i>
               </button>
               <a class="navbar-brand page-scroll" href="#page-top">
-                <i class="icon-aid-kit"></i>UMS
+              <img src="../assets/img/logo/UMS_logo.png" alt="UMS">
               </a>
               </div>
               <div class="collapse navbar-collapse  navbar-main-collapse">
                 <ul class="nav navbar-nav">
                   <li class="active"><a href="#section-slider"  >Inicio</a></li>
                   <li><a class="page-scroll" href="#section-feature" >Acerca de</a></li>
-                  <li><a class="page-scroll" href="#section-service"  >Especialidades</a></li>
-                <?php /*  <li><a class="page-scroll" href="#section-catalogue" >Catalogo</a></li> */?>
+                  <li><a class="page-scroll" href="#section-service"  >Especialidades</a></li>                 
+                 <?php /* <li><a class="page-scroll" href="#section-catalogue" >Catalogo</a></li> */?>                
                   <li><a class="page-scroll" href="#section-contact-info"  >Contacto</a></li>
                 </ul>
                 <div class="contact-no navbar-right visible-md visible-lg">
-                  <i class="fa fa-phone"></i>(33)-38604777
+                  <i class="fa fa-phone"></i> (33)38604777
                 </div>
               </div>
             </div>
@@ -60,9 +60,6 @@
         </div>
       </div>
     </div>
-    
-    								<?php /* SECTION PRINCIPAL  */ ?>
-    
     <section id="section-about">
       <div class="container">
         <div class="about-wrapper">
@@ -72,13 +69,11 @@
                 <h4> <i class="icon-users"></i> Con gusto le atenderemos</h4>
                 <div align="center">
                 <p>Puede solicitar una cita llenando el siguiente formulario o llamando a los telefonos de la unidad. </p> 
-              
                 <ul>
                 <li> <i class="fa fa-phone"></i> (33) 38 60 47 77 </li>
                 <li> <i class="fa fa-phone"></i> (33) 33 35 60 69 </li>
                 </ul>
                 </div>
-                
               </div>
             </div>
             <div class="col-md-4 col-sm-4 wow slideInRight">
@@ -97,37 +92,36 @@
                   <div class="row">
                     <div class="col-md-12 col-sm-12">
                       <div class="form-group">
-                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" autocomplete="off">
-                        <div class="help-block with-errors"></div>
+                        <input type="text" id="nombre" class="form-control" placeholder="Nombre(s)" autocomplete="off">
                       </div>
                     </div>
                     <div class="col-md-12 col-sm-12">
                       <div class="form-group">
-                        <input type="text" id="paterno" name="paterno" class="form-control" placeholder="Apellido Paterno" autocomplete="off">
-                        <div class="help-block with-errors"></div>
+                        <input type="text" id="paterno" class="form-control" placeholder="Apellido Paterno" autocomplete="off">
                       </div>
                     </div>
                     <div class="col-md-12 col-sm-12">
                       <div class="form-group">
-                        <input type="text" id="materno" name="materno" class="form-control" placeholder="Apellido Materno" autocomplete="off">
-                        <div class="help-block with-errors"></div>
+                        <input type="text" id="materno" class="form-control" placeholder="Apellido Materno" autocomplete="off" >
                       </div>
                     </div>
                     <div class="col-md-12 col-sm-12">
                       <div class="form-group">
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Su correo" autocomplete="off">
-                        <div class="help-block with-errors"></div>
+                        <input type="email" id="email" class="form-control" placeholder="Correo" autocomplete="off" ></div>
                       </div>
                       </div>
                       <div class="col-md-12 col-sm-12">
+                      <div class="form-group">
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="Telefono" autocomplete="off" </div>
+                      </div>
+                      <div class='col-md-12 col-sm-12'>
                         <div class="form-group">
-                          <input type="tel" id="phone" name="phone" class="form-control" placeholder="Su telefono" autocomplete="off">
-                          <div class="help-block with-errors"></div>
-                        </div>
-                      </div>
-                      <div class="col-md-12 col-sm-12">
-                        <div class="form-group" style="color:black">
-                          <input type="text" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM" /><span style="color:white">Agendar Cita</span>
+                          <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                              <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                          </div>
                         </div>
                       </div>
                   </div>
@@ -140,9 +134,6 @@
         </div>
       </div>
     </section>
-    
-    								<?php /* SECTION ACERCA DE  */ ?>
-    
     <section id="section-feature">
       <div class="container">
         <div class="row">
@@ -204,9 +195,6 @@
         </div>
       </div>
     </section>
-    
-									<?php /* SECTION SERVICES  */ ?>
-    
     <section id="section-service">
       <div class="container">
         <div class="row">
@@ -684,168 +672,7 @@
           </div>
         </div>
       </div>
-    </section>
-    
-    								<?php /* SECTION CATALOGUE  
-    <section id="section-catalogue" >
-      <div class="container">
-        <div class="row">
-         <div class="col-md-12 wow slideInLeft">
-            <div class="section-heading text-left">
-              <h2 class="sub-sec-title">Productos Que Ofrecemos</h2>
-              <div class="line"></div>
-            </div>
-            <div class="catalogue-control">
-              <a class="left carousel-control" href="#catalogue-carousel" role="button" data-slide="prev">
-                <i class="fa  fa-long-arrow-left " aria-hidden="true"></i>
-                <span class="sr-only">Anterior</span>
-              </a>
-              <a class="right carousel-control" href="#catalogue-carousel" role="button" data-slide="next">
-                <i class="fa  fa-long-arrow-right " aria-hidden="true"></i>
-                <span class="sr-only">Siguiente</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="carousel slide " id="catalogue-carousel">
-            <div class="carousel-inner">
-              <div class="item active">
-                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0s">
-                  <div class="catalogue-box">
-                    <img src="../assets/img/images/catalogue/zapatorto.jpg" alt="">
-                    <div class="catalogue-desc">
-                      <h4>Zapatos Ortopedicos</h4>
-                      <p>Para corregir los pies</p>
-                      <a href="#"><i class="icon-coin-dollar"></i> $$$</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
-                  <div class="catalogue-box">
-                    <img src="../assets/img/images/catalogue/caminador.jpg" alt="">
-                    <div class="catalogue-desc">
-                      <h4>Andadera</h4>
-                      <p>Para personas con dificultad motriz</p>
-                      <a href="#"><i class="icon-coin-dollar"></i> $$$</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".4s" >
-                  <div class="catalogue-box">
-                    <img src="../assets/img/images/catalogue/ferulacodo.jpg" alt="">
-                    <div class="catalogue-desc">
-                      <h4>Ferula de Codo</h4>
-                      <p>Para inmobilizar el codo</p>
-                      <a href="#"><i class="icon-coin-dollar"></i> $$$</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".6s">
-                  <div class="catalogue-box">
-                    <img src="../assets/img/images/catalogue/munequera.jpg" alt="">
-                    <div class="catalogue-desc">
-                      <h4>Muñequera</h4>
-                      <p>Para inmobilizar la muñeca</p>
-                      <a href="#"><i class="icon-coin-dollar"></i> $$$</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <div class="item ">
-              <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0s">
-                <div class="catalogue-box">
-                  <img src="../assets/img/images/catalogue/a1.jpg" alt="">
-                  <div class="catalogue-desc">
-                    <h4>nuton serton</h4>
-                    <p>cardiolgy specialist</p>
-                    <a href="#"><i class="fa fa-phone"></i> +453-24354546</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
-                <div class="catalogue-box">
-                  <img src="../assets/img/images/catalogue/a2.jpg" alt="">
-                  <div class="catalogue-desc">
-                    <h4>nuton serton</h4>
-                    <p>cardiolgy specialist</p>
-                    <a href="#"><i class="fa fa-phone"></i> +453-24354546</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".4s">
-                <div class="catalogue-box">
-                  <img src="../assets/img/images/catalogue/a3.jpg" alt="">
-                  <div class="catalogue-desc">
-                    <h4>nuton serton</h4>
-                    <p>cardiolgy specialist</p>
-                    <a href="#"><i class="fa fa-phone"></i> +453-24354546</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".6s">
-                <div class="catalogue-box">
-                  <img src="../assets/img/images/catalogue/a4.jpg" alt="">
-                  <div class="catalogue-desc">
-                    <h4>nuton serton</h4>
-                    <p>cardiolgy specialist</p>
-                    <a href="#"><i class="fa fa-phone"></i> +453-24354546</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item ">
-              <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0s">
-                <div class="catalogue-box">
-                  <img src="../assets/img/images/catalogue/a1.jpg" alt="">
-                  <div class="catalogue-desc">
-                    <h4>nuton serton</h4>
-                    <p>cardiolgy specialist</p>
-                    <a href="#"><i class="fa fa-phone"></i> +453-24354546</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
-                <div class="catalogue-box">
-                  <img src="../assets/img/images/catalogue/a2.jpg" alt="">
-                  <div class="catalogue-desc">
-                    <h4>nuton serton</h4>
-                    <p>cardiolgy specialist</p>
-                    <a href="#"><i class="fa fa-phone"></i> +453-24354546</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".4s">
-                <div class="catalogue-box">
-                  <img src="../assets/img/images/catalogue/a3.jpg" alt="">
-                  <div class="catalogue-desc">
-                    <h4>nuton serton</h4>
-                    <p>cardiolgy specialist</p>
-                    <a href="#"><i class="fa fa-phone"></i> +453-24354546</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay=".6s">
-                <div class="catalogue-box">
-                  <img src="../assets/img/images/catalogue/a4.jpg" alt="">
-                  <div class="catalogue-desc">
-                    <h4>nuton serton</h4>
-                    <p>cardiolgy specialist</p>
-                    <a href="#"><i class="fa fa-phone"></i> +453-24354546</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> 
-	
-					*/ ?>				
-    
-    								<?php /* SECTION CONTACT */ ?>
-                                    
+    </section>                     
      <section id="section-contact-info">
       <div class="container">
         <div class="row">
@@ -894,11 +721,7 @@
         </div>
       </div>
     </section> 
-	
-    
-    							<?php /* SECTION FOOTER  */ ?>
-    
-    <section id="section-footer">
+    d<section id="section-footer">
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center wow fadeInDown">
@@ -906,7 +729,6 @@
               <h2 class="footer-logo">Unidad Medica Sante</h2><p>Av. Constitución de 1917 #3204 <br> Col. Fraccionamiento Revolucion <br> 
                 Tlaquepaque, Jalisco, México
               </p>
-              <h6 class="copy">&copy;copyright reserved to themeturn.2016 Edited By Pablo PÉrez Chavira</h6>
             </div>
           </div>
         </div>
@@ -920,19 +742,9 @@
     <script src="../assets/js/wow.min.js"></script>
     <script src="../resource/respond/js/respond.js"></script>
     <script src="../assets/js/theme.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-    <script type="text/javascript">
-    $(function() {
-        $('input[name="daterange"]').daterangepicker({
-            timePicker: true,
-            timePickerIncrement: 30,
-            locale: {
-                format: 'MM/DD/YYYY h:mm A'
-            }
-        });
-    });
-  </script>
+    <script src="../resource/respond/js/respond.js"></script>
+    <script src="../resource/moment-develop/js/moment.min.js"></script>
+    <script src="../resource/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
   </body>
 </html>
 

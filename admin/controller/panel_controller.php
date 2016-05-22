@@ -27,7 +27,7 @@
       $this->USER_ACCESS = $this->USER_ACCESS->get_Response();
     }
     public function Initialize(){
-
+      require_once($_SESSION['BASE_DIR_BACKEND'].'/view/panel_view.php');
     }
     public function __destruct(){
     }
