@@ -21,6 +21,22 @@
     <![endif]-->
   </head>
   <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <div id="My_Modal" class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Contacto</h4>
+          </div>
+          <div class="modal-body">
+            <p id="Estado_Modal"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <nav class="navbar navbar-custom navbar-fixed-top" >
       <div class="container">
         <div class="row ">
@@ -64,24 +80,27 @@
       <div class="container">
         <div class="about-wrapper">
           <div class="row">
+
             <div class="col-md-4 col-sm-4 wow slideInLeft">
               <div class="about-inner">
                 <h4> <i class="icon-users"></i> Con gusto le atenderemos</h4>
                 <div align="center">
-                <p>Puede solicitar una cita llenando el siguiente formulario o llamando a los telefonos de la unidad. </p> 
-                <ul>
-                <li> <i class="fa fa-phone"></i> (33) 38 60 47 77 </li>
-                <li> <i class="fa fa-phone"></i> (33) 33 35 60 69 </li>
-                </ul>
+                  <p>Puede solicitar una cita llenando el siguiente formulario o llamando a los telefonos de la unidad. </p> 
+                  <ul>
+                    <li> <i class="fa fa-phone"></i> (33) 38 60 47 77 </li>
+                    <li> <i class="fa fa-phone"></i> (33) 33 35 60 69 </li>
+                  </ul>
                 </div>
               </div>
             </div>
+
             <div class="col-md-4 col-sm-4 wow slideInRight">
               <div class="about-inner">
                 <h4> <i class="icon-clock"></i>Horario de Atención</h4>
                 <p align="center">Lunes a Viernes <br> 9:00-14:00 &amp; 16:00-20:00</p>
               </div>
             </div>
+
             <div class="col-md-4 col-sm-4 wow slideInDown">
               <div class="top-contact">
                 <form role="form" id="contactForm" data-toggle="validator" class="shake" >
@@ -107,30 +126,31 @@
                     </div>
                     <div class="col-md-12 col-sm-12">
                       <div class="form-group">
-                        <input type="email" id="email" class="form-control" placeholder="Correo" autocomplete="off" ></div>
+                        <input type="email" id="coreo" class="form-control" placeholder="Correo" autocomplete="off" >
                       </div>
-                      </div>
-                      <div class="col-md-12 col-sm-12">
+                    </div>
+                    <div class="col-md-12 col-sm-12">
                       <div class="form-group">
-                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="Telefono" autocomplete="off" </div>
+                        <input type="tel" id="telefono" name="phone" class="form-control" placeholder="Telefono" autocomplete="off" </div>
                       </div>
-                      <div class='col-md-12 col-sm-12'>
-                        <div class="form-group">
-                          <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                          </div>
+                    </div>
+                    <div class='col-md-12 col-sm-12'>
+                      <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                          <input type='text' id="fecha" class="form-control" />
+                          <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                          </span>
                         </div>
                       </div>
+                    </div>
                   </div>
                   <button class="btn btn-primary white" id="form-submit" type="submit" value="Submit">Agendar</button>
                   <div id="msgSubmit" class="h3 text-center hidden"></div>
                 </form>
               </div>
             </div>
-          </div>
+          </div> 
         </div>
       </div>
     </section>
@@ -680,33 +700,33 @@
             <h2>Contacto</h2>
             <p>Cualquier duda, queja o sugerencia le responderemos con gusto.</p>
             <div class="status alert alert-success" style="display: none"></div>
-            <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="../controllers/email_contacto/sendemail.php" role="form">
+            <form id="main-contact-form" class="contact-form" role="form">
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <input type="text" name="nombre" class="form-control" required placeholder="Nombre">
+                    <input type="text" id="nombre_contacto" class="form-control" required placeholder="Nombre">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <input type="email" name="correo" class="form-control" required placeholder="Email">
+                    <input type="email" id="email_contacto" class="form-control" required placeholder="Email">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <input type="text" name="asunto" class="form-control" required placeholder="Asunto">
+                    <input type="text" id="asunto_contacto" class="form-control" required placeholder="Asunto">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <textarea name="mensaje" id="message" required class="form-control" rows="8" placeholder="Mensaje"></textarea>
+                    <textarea id="mensaje_contacto" required class="form-control" rows="8" placeholder="Mensaje"></textarea>
                   </div>
                   <div class="form-group">
-                    <button type="submit" class="btn btn-danger btn-lg">Enviar Mensaje</button>
+                    <button id="submit_contacto" class="btn btn-danger btn-lg">Enviar Mensaje</button>
                   </div>
                 </div>
               </div>
@@ -741,9 +761,8 @@
     <script src="../assets/js/jquery.easing.min.js"></script>
     <script src="../assets/js/wow.min.js"></script>
     <script src="../resource/respond/js/respond.js"></script>
-    <script src="../assets/js/theme.js"></script>
-    <script src="../resource/respond/js/respond.js"></script>
     <script src="../resource/moment-develop/js/moment.min.js"></script>
+    <script src="../assets/js/theme.js"></script>
     <script src="../resource/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
   </body>
 </html>

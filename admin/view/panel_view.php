@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UME</title>
+  <title>ESPREZZA</title>
   <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/bootstrap-sweetalert/lib/sweet-alert.css'); ?>" rel="stylesheet">
   <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css'); ?>" rel="stylesheet">
   <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND']. '/resources/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css'); ?>" rel="stylesheet"> 
@@ -21,7 +21,7 @@
           </div>
         </li>
         <li class="logo hidden-xs">
-          <a href="index.html">UME Panel Administrativo</a>
+          <a href="index.html">ESPREZZA</a>
         </li>
         <li class="pull-right">
           <ul class="top-menu">
@@ -52,18 +52,6 @@
               <li><a href="usuarios">Usuarios</a></li>
               <li><a href="deparmentos">Deparmentos</a></li>
               <li><a href="areas">Areas</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href=""><i class="zmdi zmdi-view-compact"></i>Secretaria</a>
-            <ul>
-              <li><a href="asignaciones">Asignaciones</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href=""><i class="zmdi zmdi-view-compact"></i>Medico</a>
-            <ul>
-              <li><a href="expedientes">Expedientes</a></li>
             </ul>
           </li>
         </ul>

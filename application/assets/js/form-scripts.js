@@ -1,53 +1,87 @@
-$("#contactForm").validator().on("submit", function (event) {
-    if (event.isDefaultPrevented()) {
-        // handle the invalid form...
-        formError();
-        submitMSG(false, "¿Olvidaste llenar algun campo?");
-    } else {
-        // everything looks good!
-        event.preventDefault();
-        submitForm();
-    }
+$(document).ready(function(){
+    $('#submit_contacto').click(function(e){
+      e.preventDefault();
+      var Modal = $('#Estado_Modal');
+      var data  = {
+        Nombre:         $('#nombre_contacto').val(),
+        Email:          $('#email_contacto').val(),
+        Asunto:         $('#asunto_contacto').val(),
+        Mensaje:        $('#mensaje_contacto').val()
+      };
+      $.ajax({
+        type:          "post",
+        url:           "../controllers/email_contacto/sendemail.php",
+        async:         true,
+        cache:         false,
+        data:          JSON.stringify(data),
+        contentType:   "application/json; charset=utf-8",
+        dataType :     "json",
+        beforeSend:    function(response){
+        },
+        success:       function(response){
+          if(response.Success){
+            Modal.html('Correo enviado con exito');
+            $('#My_Modal').modal('show');
+            setTimeout(function(){
+              $('#My_Modal').modal('hide');
+            }, 2000);
+          }
+          else{
+            Modal.html('Error interno');
+            $('#My_Modal').modal('show');
+            setTimeout(function(){
+                $('#My_Modal').modal('hide');
+            }, 2000);   
+          }
+        },
+        error:         function(response, error){
+          alert("Error Interno: " + error);
+        }  
+      });
+    return false;  
+  });
+  $('#form-submit').click(function(e){
+      e.preventDefault();
+      var Modal = $('#Estado_Modal');
+      var data  = {
+        Nombre:           $('#nombre').val(),
+        Paterno:          $('#paterno').val(),
+        Materno:          $('#materno').val(),
+        Correo:           $('#coreo').val(),
+        Telefono:         $('#telefono').val(),
+        Fecha:            $('#fecha').val()
+      };
+      $.ajax({
+        type:          "post",
+        url:           "../controllers/email_contacto/sendemails.php",
+        async:         true,
+        cache:         false,
+        data:          JSON.stringify(data),
+        contentType:   "application/json; charset=utf-8",
+        dataType :     "json",
+        beforeSend:    function(response){
+        },
+        success:       function(response){
+          if(response.Success){
+            Modal.html('Cita agendada con exito');
+            $('#My_Modal').modal('show');
+            setTimeout(function(){
+              $('#My_Modal').modal('hide');
+            }, 2000);
+          }
+          else{
+            Modal.html('Error interno');
+            $('#My_Modal').modal('show');
+            setTimeout(function(){
+                $('#My_Modal').modal('hide');
+            }, 2000);   
+          }
+        },
+        error:         function(response, error){
+          alert("Error Interno: " + error);
+        }  
+      });
+    return false;  
+  });
 });
 
-
-function submitForm(){
-    var name = $("#name").val();
-    var email = $("#email").val();
-    var phone = $("#phone").val();
-    alert(phone);
-
-    $.ajax({
-        type: "POST",
-        url: "php/form-process.php",
-        data: "name=" + name + "&email=" + email + "&phone=" + phone,
-        success : function(text){
-            if (text == "success"){
-                formSuccess();
-            } else {
-                formError();
-                submitMSG(false,text);
-            }
-        }
-    });
-}
-
-function formSuccess(){
-    $("#contactForm")[0].reset();
-    submitMSG(true, "Message has been Submitted!")
-}
-
-function formError(){
-    $("#contactForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-        $(this).removeClass();
-    });
-}
-
-function submitMSG(valid, msg){
-    if(valid){
-        var msgClasses = "h3 text-center tada animated text-success";
-    } else {
-        var msgClasses = "h3 text-center text-danger";
-    }
-    $("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
-}

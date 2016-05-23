@@ -78,7 +78,6 @@ $(document).ready(function(){
         });
         $('#user_login').click(function(e){
           e.preventDefault();
-          var body  = $("body");
           var Modal = $('#Estado_Modal');
           var data  = {
             NameUser:       $('#UserName').val(),
