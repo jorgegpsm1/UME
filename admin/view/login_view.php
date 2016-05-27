@@ -11,12 +11,12 @@
     <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/assets/css/app.min.1.css'); ?>" rel="stylesheet">
   </head>
   <body class="login-content">
-    <div id="My_Modal" class="modal fade" id="myModal" role="dialog">
+    <div id="My_Modal" class="modal bounce" id="myModal" role="dialog">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Login</h4>
+            <h4 class="modal-title">Inicio de sesión</h4>
           </div>
           <div class="modal-body">
             <p id="Estado_Modal"></p>

@@ -96,14 +96,14 @@ $(document).ready(function(){
             },
             success:       function(response){
               if(response.Success){
-                Modal.html('Ingresando al sistema....');
+                Modal.html('Ingresando al sistema...');
                 $('#My_Modal').modal('show');
                 setTimeout(function(){
                     window.location.replace("./index.php");
                 }, 3000);
               }
               else{
-                Modal.html('Error al ingresar al sistema');
+                Modal.html('Error');
                 $('#My_Modal').modal('show');
                 setTimeout(function(){
                     $('#My_Modal').modal('hide');

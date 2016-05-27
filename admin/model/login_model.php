@@ -5,27 +5,27 @@
     private $Response;
     private $Connection;
     private $Query;
-    private $Action;
+
     
     public function __construct(){
       $this->Connection   = Database::Connect();
     }
     private function set_Query(){
-      switch ($this->Action){
-        case '1':
+      switch ($_SESSION['ACTION']){
+        case ('1'):
           $this->Query['SQL_A']       = "SELECT ID_USER, USER_LOGIN_NAME, USER_LOGIN_PASS, USER_STATUS  FROM USER_ACCESS";
           break;
-        case '1.1':
+        case ('1.1'):
           $this->Query['SQL_A']       = "SELECT ID_USER, USER_SESSIONS, USER_SESSION_PASS FROM USER_SESSION_ACCESS";
           $this->Query['SQL_B']       = "UPDATE USER_SESSION_ACCESS SET USER_SESSIONS = :SESSION WHERE ID_USER = :ID";
           break;
 
-        case '1.2':
+        case ('1.2'):
           $this->Query['SQL_A']       = "INSERT INTO USER_SESSIONS_ACCESS_{$this->Request['ID']} (ID_SESSION, USER_KEY, USER_IP, USER_BROWSER, USER_SESSION_TEMP) 
                                                                                           VALUES (:SESSION, :KEY, :IP, :BROWSER, :SESSION_TEMP)";
           break;
 
-        case '2':
+        case ('2'):
           $this->Query['SQL_A']       = "SELECT  ID_SESSION, USER_KEY FROM  USER_SESSIONS_ACCESS_{$this->Request['__ugate']}";
           break;
 
@@ -37,7 +37,6 @@
       $this->Request    = $Request;
       $this->Response   = null;
       $this->Query      = null;
-      $this->Action     = $this->Request['Action'];
     }
     public function get_Response($Input){
       $this->get_Request($Input);
@@ -46,8 +45,8 @@
       return $this->Response;
     }
     private function set_Response(){
-      switch($this->Action){ 
-        case '1':
+      switch($_SESSION['ACTION']){ 
+        case ('1'):
           try{
             $this->Response['Success'] = false;
             $result_1 = $this->Connection->prepare($this->Query['SQL_A']);
@@ -70,7 +69,7 @@
           }
           break;
 
-          case '1.1':
+          case ('1.1'):
           $this->Response['Success'] = false;
           try{
             $result_1 = $this->Connection->prepare($this->Query['SQL_A']);
@@ -97,7 +96,7 @@
             echo "General Error: The user could not be added.<br>".$e->getMessage();
           }
           break;
-        case '1.2':
+        case ('1.2'):
           try{
             $this->Response['Success'] = false;
             $result_1 = $this->Connection->prepare($this->Query['SQL_A']);
@@ -117,7 +116,7 @@
           }
           break;
 
-        case '2':
+        case ('2'):
           try{
             $this->Response['Success'] = false;
             $result = $this->Connection->prepare($this->Query['SQL_A']);

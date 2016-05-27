@@ -46,14 +46,23 @@
           </a>
         </div>
         <ul class="main-menu">
-          <li class="sub-menu">
-            <a href=""><i class="zmdi zmdi-view-compact"></i>Administrador</a>
-            <ul>
-              <li><a href="usuarios">Usuarios</a></li>
-              <li><a href="deparmentos">Deparmentos</a></li>
-              <li><a href="areas">Areas</a></li>
-            </ul>
-          </li>
+          <?php 
+          foreach($this->USER_ACCESS[0] as $Department){
+            switch($Department){
+              case 1:
+                require_once($_SESSION['BASE_DIR_BACKEND'].'/assets/ajax/1/sistemas.php');
+              break;
+
+              case 2:
+                require_once($_SESSION['BASE_DIR_BACKEND'].'/assets/ajax/2/sistemas.php');
+              break;
+
+              case 3:
+                require_once($_SESSION['BASE_DIR_BACKEND'].'/assets/ajax/3/sistemas.php');
+              break;
+            }
+          } 
+          ?>
         </ul>
       </aside>
       <section id="content">
