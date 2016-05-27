@@ -46,7 +46,7 @@
     <div class="row">   
       <div class="col-md-1"></div>
       <div class="col-md-10">
-        <h3>Administracion Usuarios</h3>
+        <h1>Expedientes</h1>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-2">
@@ -65,7 +65,7 @@
           <tbody>
           <tr>
             <td>1</td>
-            <td>jorge</td>
+            <td id="nombres">jorge</td>
             <td>
               <a href="crear_usuario"><span class="glyphicon glyphicon-pencil"></span></a>
               <a href="crear_usuario"><span class="glyphicon glyphicon-trash"></span></a>
@@ -74,6 +74,9 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div id="uno">
+      
     </div>
   </div>
   <div class="modal fade" id="create_user" tabindex="-1" role="dialog">
@@ -100,6 +103,7 @@
             <option value="1">Administracion</option>
             <option value="2">Secretaria</option>
             <option value="3">Medico</option>
+            <option value="4">Medico Diagnostico</option>
           </select>
           </div>
         </form>
@@ -114,6 +118,7 @@
 
 <script>
   (function(){
+    $('#nombres').html('Karla');
     $('#create_new_user').click(function(e){
           var data = { 
             NameUser:       $('#new_user_name').val(),

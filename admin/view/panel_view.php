@@ -42,34 +42,31 @@
             <div class="profile-pic">
               <img src="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/assets/img/profile-pics/1.jpg'); ?>" alt="">
             </div>
-            <?php echo ($_SESSION['ID']); ?>
           </a>
         </div>
         <ul class="main-menu">
           <?php 
-          foreach($this->USER_ACCESS[0] as $Department){
-            switch($Department){
-              case 1:
-                require_once($_SESSION['BASE_DIR_BACKEND'].'/assets/ajax/1/sistemas.php');
-              break;
+            foreach(self::$USER_ACCESS[0] as $Department){
+              switch($Department){
+                case 1:
+                  require_once($_SESSION['BASE_DIR_BACKEND'].'/view/include/Administracion/departament.php');
+                break;
 
-              case 2:
-                require_once($_SESSION['BASE_DIR_BACKEND'].'/assets/ajax/2/sistemas.php');
-              break;
+                case 2:
+                  require_once($_SESSION['BASE_DIR_BACKEND'].'/view/include/Medicos/departament.php');
+                break;
 
-              case 3:
-                require_once($_SESSION['BASE_DIR_BACKEND'].'/assets/ajax/3/sistemas.php');
-              break;
-            }
-          } 
+                case 3:
+                  require_once($_SESSION['BASE_DIR_BACKEND'].'/view/include/Secretaria/departament.php');
+                break;
+              }
+            } 
           ?>
         </ul>
       </aside>
       <section id="content">
         <div class="container">
-          <div class="block-header">
-            <h2>Dashboard</h2>
-          </div>
+            <h1>UME Dashboard</h1>
         </div>
       </section>
     </section>

@@ -15,17 +15,15 @@
         case ('1'):
           require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/login_controller.php');
           Login_Controller::Initialize();
-          break;
+        break;
         case ('2'):
           require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/login_controller.php');
           Login_Controller::Initialize();
-          break;
+        break;
         case ('3'):
           require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/panel_controller.php');
           Panel_Controller::Initialize();
-          break;
-        default:
-          break;
+        break;
       }
     }
     public function __destruct(){

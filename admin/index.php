@@ -11,4 +11,4 @@
 	$_SESSION['BASE_FILE']	= basename(basename($_SERVER['SCRIPT_NAME']),'.php');
 
 	require_once($_SESSION['BASE_DIR_BACKEND'].'/controller/main_controller.php');
-?>}
+?>

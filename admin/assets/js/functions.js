@@ -54,23 +54,31 @@ $(document).ready(function(){
           $(div).load(URL);
         }
 
-        $("a[href$='usuarios']").click(function(event){
+        $("a[href$='1_usuarios']").click(function(event){
             event.preventDefault();
-            cargarContenido(('#content'),'assets/ajax/usuarios.html');
+            cargarContenido(('#content'),'assets/ajax/usuarios.php');
             return false;
         });
 
-        $("a[href$='asignaciones']").click(function(event){
+        $("a[href$='1_departamento']").click(function(event){
             event.preventDefault();
-            cargarContenido(('#content'),'assets/ajax/asignaciones.html');
+            cargarContenido(('#content'),'assets/ajax/departamentos.php');
             return false;
         });
 
-        $("a[href$='expedientes']").click(function(event){
+        $("a[href$='2_expediente']").click(function(event){
             event.preventDefault();
-            cargarContenido(('#content'),'assets/ajax/expedientes.html');
+            cargarContenido(('#content'),'assets/ajax/expedientes.php');
             return false;
         });
+
+        $("a[href$='3_citas']").click(function(event){
+            event.preventDefault();
+            cargarContenido(('#content'),'assets/ajax/citas.php');
+            return false;
+        });
+
+
 
         var Check = $('#UserCheck').is(':checked');
         $('#UserCheck').change(function(){
