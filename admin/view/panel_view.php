@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ESPREZZA</title>
+  <title>UMS</title>
   <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/bootstrap-sweetalert/lib/sweet-alert.css'); ?>" rel="stylesheet">
   <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css'); ?>" rel="stylesheet">
   <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND']. '/resources/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css'); ?>" rel="stylesheet"> 
-  <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND']. '/assets/css/app.css'); ?>" rel="stylesheet">       
+  <link href="<?php echo ($_SESSION['BASE_DIR_FRONTEND']. '/assets/css/app.css'); ?>" rel="stylesheet">    
+  
   </head>
   <body>
     <header id="header" class="clearfix" data-current-skin="blue">
@@ -21,7 +22,7 @@
           </div>
         </li>
         <li class="logo hidden-xs">
-          <a href="index.html">ESPREZZA</a>
+          <a href="index.html">UMS</a>
         </li>
         <li class="pull-right">
           <ul class="top-menu">
@@ -51,7 +52,7 @@
                 case 1:
                   require_once($_SESSION['BASE_DIR_BACKEND'].'/view/include/Administracion/departament.php');
                 break;
-
+                
                 case 2:
                   require_once($_SESSION['BASE_DIR_BACKEND'].'/view/include/Medicos/departament.php');
                 break;
@@ -66,18 +67,12 @@
       </aside>
       <section id="content">
         <div class="container">
-            <h1>UME Dashboard</h1>
+            <h1>UMS Dashboard</h1>
         </div>
       </section>
     </section>
-    <footer id="footer">Copyright &copy; 2016 Jorge Garcia (͡° ͜ʖ ͡°)
-      <ul class="f-menu">
-        <li><a href="">Home</a></li>
-        <li><a href="">Dashboard</a></li>
-        <li><a href="">Reports</a></li>
-        <li><a href="">Support</a></li>
-        <li><a href="">Contact</a></li>
-      </ul>
+    <footer id="footer">
+    <p>Copyright &copy; 2016 Tu papa (͡° ͜ʖ ͡°)</p>
     </footer>     
     <div class="page-loader">
       <div class="preloader pls-blue">

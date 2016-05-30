@@ -1,12 +1,12 @@
 <?php
    @session_start();
-   require_once($_SESSION['BASE_DIR_BACKEND'].'/model/login_model.php'); 
+   require_once($_SESSION['BASE_DIR_BACKEND'].'/model/config/database.php'); 
    $Connection   = Database::Connect();
 	$Json = file_get_contents('php://input');
    $Input = json_decode($Json,true);
    $Query  					   =    array();
-   $Query['SQL_A']   		=    "SELECT COUNT(ID_USER) as VAL FROM user_access";
-   $Query['SQL_B']			=    "INSERT INTO USER_SESSIONS_ACCESS (ID_USER, USER_SESSION_PASS VALUES (:USER_ID, :USER_PASS)";
+   $Query['SQL_A']   		=    "SELECT COUNT(id_user) as VAL FROM user_access";
+   $Query['SQL_B']			=    "INSERT INTO user_session_access (id_user, user_session_pass VALUES (:USER_ID, :USER_PASS)";
 
 
    $Input['NameUser'];

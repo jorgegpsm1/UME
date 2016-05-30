@@ -13,20 +13,20 @@
     private function set_Query(){
       switch ($_SESSION['ACTION']){
         case ('1'):
-          $this->Query['SQL_A']       = "SELECT ID_USER, USER_LOGIN_NAME, USER_LOGIN_PASS, USER_STATUS  FROM USER_ACCESS";
+          $this->Query['SQL_A']       = "SELECT id_user, user_login_name, user_login_pass, user_status  FROM user_access";
           break;
         case ('1.1'):
-          $this->Query['SQL_A']       = "SELECT ID_USER, USER_SESSIONS, USER_SESSION_PASS FROM USER_SESSION_ACCESS";
-          $this->Query['SQL_B']       = "UPDATE USER_SESSION_ACCESS SET USER_SESSIONS = :SESSION WHERE ID_USER = :ID";
+          $this->Query['SQL_A']       = "SELECT id_user, user_sessions, user_session_pass FROM user_session_access";
+          $this->Query['SQL_B']       = "UPDATE user_session_access SET user_sessions = :SESSION WHERE id_user = :ID";
           break;
 
         case ('1.2'):
-          $this->Query['SQL_A']       = "INSERT INTO USER_SESSIONS_ACCESS_{$this->Request['ID']} (ID_SESSION, USER_KEY, USER_IP, USER_BROWSER, USER_SESSION_TEMP) 
+          $this->Query['SQL_A']       = "INSERT INTO user_sessions_access_{$this->Request['ID']} (id_session, user_key, user_ip, user_browser, user_session_temp) 
                                                                                           VALUES (:SESSION, :KEY, :IP, :BROWSER, :SESSION_TEMP)";
           break;
 
         case ('2'):
-          $this->Query['SQL_A']       = "SELECT  ID_SESSION, USER_KEY FROM  USER_SESSIONS_ACCESS_{$this->Request['__ugate']}";
+          $this->Query['SQL_A']       = "SELECT  id_session, user_key FROM  user_sessions_access_{$this->Request['__ugate']}";
           break;
 
         default:
@@ -52,10 +52,10 @@
             $result_1 = $this->Connection->prepare($this->Query['SQL_A']);
             $result_1->execute();
             while($row = $result_1->fetch(PDO::FETCH_ASSOC)){
-              if($row['USER_LOGIN_NAME'] == $this->Request['NameUser']){
-                if(password_verify($this->Request['PasswordUser'],$row['USER_LOGIN_PASS']) && $row['USER_STATUS'] == 1){
+              if($row['user_login_name'] == $this->Request['NameUser']){
+                if(password_verify($this->Request['PasswordUser'],$row['user_login_pass']) && $row['user_status'] == 1){
                   $this->Response['Success'] = true;
-                  $this->Response['ID']   = $row['ID_USER'];
+                  $this->Response['ID']   = $row['id_user'];
                   break;
                 }
               }
@@ -76,10 +76,10 @@
             $result_2 = $this->Connection->prepare($this->Query['SQL_B']);
             $result_1->execute();
             while($row = $result_1->fetch(PDO::FETCH_ASSOC)){
-              if($row['ID_USER'] == $this->Request['ID']){
-                $this->Response['ID']       = $row['ID_USER'];
-                $this->Response['Session']  = $row['USER_SESSIONS'];
-                $this->Response['Key']      = $row['USER_SESSION_PASS'];
+              if($row['id_user'] == $this->Request['ID']){
+                $this->Response['ID']       = $row['id_user'];
+                $this->Response['Session']  = $row['user_sessions'];
+                $this->Response['Key']      = $row['user_session_pass'];
                 $this->Response['Session']+=1;
                 break;
                 }
@@ -122,8 +122,8 @@
             $result = $this->Connection->prepare($this->Query['SQL_A']);
             $result->execute();
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
-              if($row['ID_SESSION'] == $this->Request['__uanchor']){
-                if($row['USER_KEY'] == $this->Request['__ukey']){
+              if($row['id_session'] == $this->Request['__uanchor']){
+                if($row['user_key'] == $this->Request['__ukey']){
                   $this->Response['Success']  = true;
                   break;
                 }

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <style>
   h3{
     text-align: center;
@@ -5,18 +6,6 @@
   }
   th,td{
     text-align: center;
-  }
-  .id{
-    width: 10%;
-  }
-  .user{
-    width: 25%;
-  }
-  .passwd{
-    width: 25%;
-  }
-  .action{
-    width: 40%;
   }
   #feedback{ 
     font-size: 1.4em; 
@@ -46,114 +35,147 @@
     <div class="row">   
       <div class="col-md-1"></div>
       <div class="col-md-10">
-        <h1>Agendar Citas</h1>
+        <h1 class='text-center'>Agendar Citas</h1>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create_user">Crear Usuario</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#crear_cita">Crear cita</button>
       </div>
       <div class="col-md-10"></div>
       <div class="col-md-12">
-        <table class="table table-striped table-bordered tabla">
-          <thead>
-          <tr>
-            <th class="id">ID</th>
-            <th class="user">USUARIO</th>
-            <th class="action">ACCIONES</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>1</td>
-            <td id="nombres">jorge</td>
-            <td>
-              <a href="crear_usuario"><span class="glyphicon glyphicon-pencil"></span></a>
-              <a href="crear_usuario"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <div class="outer_div">
+          <div class="table-responsive">
+            <table class="table" id="myTable">
+              <thead>
+              <tr class="info">
+                <th class="col-md-2">ID_CITA</th>
+                <th class="col-md-2">NOMBRE</th>
+                <th class="col-md-2">CORREO</th>
+                <th class="col-md-2">TELEFONO</th>
+                <th class="col-md-2">FECHA</th>
+                <th class="col-md-2">ACCIONES</th>
+              </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="uno">
-      
-    </div>
   </div>
-  <div class="modal fade" id="create_user" tabindex="-1" role="dialog">
+  <div class="modal fade" id="crear_cita" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="usuarios_mensaje">Crear Usuario</h4>
+          <h4 class="modal-title" id="usuarios_mensaje">Crear Cita</h4>
         </div>
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="new_user_name" class="control-label">Usuario</label>
-            <input id="new_user_name" type="text" class="form-control" autocomplete="off" required > 
+            <label for="nombre_completo" class="control-label">Nombre Completo</label>
+            <input id="nombre_completo" type="text" class="form-control" autocomplete="off" required > 
           </div>
           <div class="form-group">
-            <label for="new_user_password" class="control-label">Contraseña</label>
-            <input id="new_user_password" type="password" class="form-control" autocomplete="off" required>
+            <label for="apellido_paterno" class="control-label">Apellido Paterno</label>
+            <input id="apellido_paterno" type="text" class="form-control" autocomplete="off" required > 
           </div>
           <div class="form-group">
-            <label for="Departamento" class="control-label">Departamento</label>
-            <br />
-          <select id="Departamento" >
-            <option value="1">Administracion</option>
-            <option value="2">Secretaria</option>
-            <option value="3">Medico</option>
-            <option value="4">Medico Diagnostico</option>
-          </select>
+            <label for="apellido_materno" class="control-label">Apellido Materno</label>
+            <input id="apellido_materno" type="text" class="form-control" autocomplete="off" required > 
+          </div>
+          <div class="form-group">
+            <label for="correo" class="control-label">Correo Electronico</label>
+            <input id="correo" type="email" class="form-control" autocomplete="off" required > 
+          </div>
+          <div class="form-group">
+            <label for="telefono" class="control-label">Telefono</label>
+            <input id="telefono" type="tel" class="form-control" autocomplete="off" required > 
+          </div>
+          <div class="form-group">
+            <div class='input-group date' id='datetimepicker1'>
+              <input type='text' id="fecha" class="form-control" />
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        <button id="create_new_user" type="button" class="btn btn-primary" data-dismiss="modal">Crear Usuario</button>
+        <button id="crear_nueva_cita" type="button" class="btn btn-primary" data-dismiss="modal">Crear Cita</button>
       </div>
       </div>
     </div>
   </div>
-
+<script src="<?php echo ($_SESSION['BASE_DIR_FRONTEND'].'/resources/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js'); ?>"></script>
 <script>
   (function(){
-    $('#nombres').html('Karla');
-    $('#create_new_user').click(function(e){
-          var data = { 
-            NameUser:       $('#new_user_name').val(),
-            PasswordUser:   Sha256.hash($('#new_user_password').val()),
-            DepartmentUser: $('#Departamento').val()
-          };
-          $.ajax({
-            type:          "post",
-            url:           "./model/class/create_user.php",
-            async:         true,
-            cache:         false,
-            data:          JSON.stringify(data),
-            contentType:   "application/json; charset=utf-8",
-            dataType :     "json",
-            beforeSend:    function(response){
-            },
-            success:       function(response){
-              if(response.Success){
-                $('#new_user_name').val(''),
-                $('#new_user_password').val(''),
-                $('#Departamento').val(1),
-                $("#create_user").modal('toggle');
-              }
-              else{
-                $('#new_user_name').val(''),
-                $('#new_user_password').val(''),
-                $('#Departamento').val(''),
-                $("#create_user").modal('toggle');
-              }
-            },
-            error:         function(response, error){
-              alert("Error Interno: " + error);
-            }  
-          });
-        return false;  
-      });
+      $('#datetimepicker1').datetimepicker();
+      get_info();
+      function get_info(){
+        $("#myTable > tbody").html('');
+        $.getJSON("./model/class/load_citas.php", function(){
+      console.log("success");
+      })
+      .done(function(Response,statusText,jqXhr){
+        var x;
+        for(x=0; x<Response['COUNT']; x++){
+          var newListItem = "<tr>";
+          newListItem+= "<td>" + Response['INFO'][x]['id_cita'] + "</td>";
+          newListItem+= "<td>" + Response['INFO'][x]['apellido_paterno'] + " " + Response['INFO'][x]['apellido_materno'] + " " + Response['INFO'][x]['nombre'] + "</td>";
+          newListItem+= "<td>" + Response['INFO'][x]['correo'] + "</td>";
+          newListItem+= "<td>" + Response['INFO'][x]['telefono'] + "</td>";
+          newListItem+= "<td>" + Response['INFO'][x]['fecha'] + "</td>";
+          newListItem+= "<td><span class='pull-center'>";
+          newListItem+= "<a class='btn btn-default' href='Editar_Cita_?id="+Response['INFO'][x]['ID_CITA']+"'><span class='glyphicon glyphicon-pencil'></span></a>";
+          newListItem+= "<a class='btn btn-default' href='Eliminar_Cita_?id="+Response['INFO'][x]['ID_CITA']+"'><span class='glyphicon glyphicon-trash'></span></a>";  
+          newListItem+= "</span></td>";
+          newListItem+= "</tr>";
+          $("#myTable > tbody").append(newListItem);
+        }
+      
+      })
+      .fail(function() {
+      })
+      .always(function() {
+    });
+      }
+
+      $('#crear_nueva_cita').click(function(e){
+        var data = { 
+          nombre:       $('#nombre_completo').val(),
+          apellido_p:       $('#apellido_paterno').val(),
+          apellido_m:       $('#apellido_materno').val(),
+          correo:       $('#correo').val(),
+          telefono:       $('#telefono').val(),
+          fecha:       $('#fecha').val()
+        };
+        $.ajax({
+          type:          "post",
+          url:           "./model/class/create_cita.php",
+          async:         false,
+          cache:         false,
+          data:          JSON.stringify(data),
+          contentType:   "application/json; charset=utf-8",
+          dataType :     "json",
+          success:       function(response){
+            if(response.Success){
+              $("#crear_cita").modal('toggle');
+              get_info();
+            }
+            else{
+              $("#crear_cita").modal('toggle');
+              alert("Error");
+            }
+          },
+          error:         function(response, error){
+            alert("Error Interno: " + error);
+          }  
+        });
+      return false;  
+    });
   })();
 </script>

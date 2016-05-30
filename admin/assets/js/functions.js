@@ -49,6 +49,7 @@ $(document).ready(function(){
                 }, 250);
             }
         });
+        
 
         function cargarContenido(div,URL){
           $(div).load(URL);
@@ -69,6 +70,12 @@ $(document).ready(function(){
         $("a[href$='2_expediente']").click(function(event){
             event.preventDefault();
             cargarContenido(('#content'),'assets/ajax/expedientes.php');
+            return false;
+        });
+        
+        $("a[href$='2_citas']").click(function(event){
+            event.preventDefault();
+            cargarContenido(('#content'),'assets/ajax/citas.php');
             return false;
         });
 

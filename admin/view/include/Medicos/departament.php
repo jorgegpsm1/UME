@@ -7,6 +7,9 @@
 		    case 1:
 		   		require_once($_SESSION['BASE_DIR_BACKEND'].'/view/include/Medicos/area/expediente.php');
 		    break;
+		    case 2:
+		   		require_once($_SESSION['BASE_DIR_BACKEND'].'/view/include/Medicos/area/citas.php');
+		    break;
 		  }
 		} 
 	?>

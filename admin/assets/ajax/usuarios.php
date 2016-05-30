@@ -46,7 +46,7 @@
     <div class="row">   
       <div class="col-md-1"></div>
       <div class="col-md-10">
-        <h1>Usuarios</h1>
+        <h1 class='text-center'>Usuarios</h1>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-2">
@@ -54,29 +54,23 @@
       </div>
       <div class="col-md-10"></div>
       <div class="col-md-12">
-        <table class="table table-striped table-bordered tabla">
-          <thead>
-          <tr>
-            <th class="id">ID</th>
-            <th class="user">USUARIO</th>
-            <th class="action">ACCIONES</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>1</td>
-            <td id="nombres">jorge</td>
-            <td>
-              <a href="crear_usuario"><span class="glyphicon glyphicon-pencil"></span></a>
-              <a href="crear_usuario"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <div class="outer_div">
+          <div class="table-responsive">
+            <table class="table" id="myTable">
+              <thead>
+              <tr class="info">
+                <th class="col-md-3">ID</th>
+                <th class="col-md-3">USUARIO</th>
+                <th class="col-md-3">ESTADO</th>
+                <th class="col-md-3">ACCIONES</th>
+              </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-    </div>
-    <div id="uno">
-      
     </div>
   </div>
   <div class="modal fade" id="create_user" tabindex="-1" role="dialog">
@@ -118,6 +112,36 @@
 
 <script>
   (function(){
+      $.getJSON("./model/class/load_user.php", function(){
+      console.log("success");
+      })
+      .done(function(Response,statusText,jqXhr){
+        var x,y;
+        for(x=0; x<Response['COUNT']; x++){
+          y=0;
+          var newListItem = "<tr>";
+          $.each(Response['INFO'][x], function(Key,Value ){
+            if(y==2){
+              newListItem+= "<td>" + Value + "</td>";
+              newListItem+= "<td><span class='pull-center'>";
+              newListItem+= "<a class='btn btn-default' href='Editar_Usuario_?id="+Response['INFO'][x]['ID_USER']+"'><span class='glyphicon glyphicon-pencil'></span></a>";
+              newListItem+= "<a class='btn btn-default' href='Eliminar_Usuario_?id="+Response['INFO'][x]['ID_USER']+"'><span class='glyphicon glyphicon-trash'></span></a>";  
+              newListItem+= "</span></td>";
+            }
+            else{
+              newListItem+= "<td>" + Value + "</td>"; 
+            }
+            y++;
+          });
+            newListItem+= "</tr>";
+            $("#myTable > tbody").append(newListItem);
+        }
+      
+      })  //var newListItem = "<td><span class='pull-center'>" +  + "</span></td>";
+      .fail(function() {
+      })
+      .always(function() {
+    });
     $('#create_new_user').click(function(e){
           var data = { 
             NameUser:       $('#new_user_name').val(),

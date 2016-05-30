@@ -14,19 +14,19 @@
     private function set_Query($KEY_1 = 0, $KEY_2 = 0, $KEY_3 = 0){
       switch($this->Action){
         case '1':
-          return ("SELECT ID_DEPARTMENT, DEPARTMENT_STATUS FROM DEPARTMENT");
+          return ("SELECT id_department, department_status FROM department");
           break;
 
         case '1.1':
-          return ("SELECT USER_DEPARTMENT_STATUS FROM DEPARTMENT_USER_ACCESS_{$KEY_1} WHERE ID_USER = {$_SESSION['ID']}");
+          return ("SELECT user_department_status FROM department_user_access_{$KEY_1} WHERE id_user = {$_SESSION['ID']}");
           break;
 
         case '2':
-          return ("SELECT ID_AREA, AREA_STATUS FROM DEPARTMENT_AREA_{$KEY_1}");
+          return ("SELECT id_area, area_status FROM department_area_{$KEY_1}");
           break;
 
         case '2.1':
-          return ("SELECT USER_DEPARTMENT_AREA_STATUS FROM DEPARTMENT_AREA_USER_ACCESS_{$KEY_1}_{$KEY_2} WHERE ID_USER = {$_SESSION['ID']}");
+          return ("SELECT user_department_area_status FROM department_area_user_access_{$KEY_1}_{$KEY_2} WHERE id_user = {$_SESSION['ID']}");
 
           break;
 
@@ -35,7 +35,7 @@
           break;
 
         case '3.1':
-          return ("SELECT USER_DEPARTMENT_AREA_MODULE_ACCESS_STATUS FROM DEPARTMENT_AREA_USER_ACCESS_{$KEY_1}_{$KEY_2}_{$KEY_3} WHERE ID_USER = {$_SESSION['ID']}");
+          return ("SELECT USER_DEPARTMENT_AREA_MODULE_ACCESS_STATUS FROM department_area_user_access_{$KEY_1}_{$KEY_2}_{$KEY_3} WHERE id_user = {$_SESSION['ID']}");
           break;
 
         default:
@@ -57,8 +57,8 @@
           $result = $this->Connection->prepare($this->set_Query());
           $result->execute();
           while($row = $result->fetch(PDO::FETCH_ASSOC)){
-            if($row['DEPARTMENT_STATUS'] == 1){
-              array_push($this->Response['DEPARTMENT']['DEPARTMENT_ACCESS'],$row['ID_DEPARTMENT']);
+            if($row['department_status'] == 1){
+              array_push($this->Response['DEPARTMENT']['DEPARTMENT_ACCESS'],$row['id_department']);
             }
           }
           $result->closeCursor();
@@ -69,7 +69,7 @@
             $result = $this->Connection->prepare($this->set_Query($this->Response['DEPARTMENT']['DEPARTMENT_ACCESS'][$x]));
             $result->execute();
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
-              if($row['USER_DEPARTMENT_STATUS'] == 1){
+              if($row['user_department_status'] == 1){
                 array_push($this->Response['DEPARTMENT']['DEPARTMENT_USER_ACCESS'],$this->Response['DEPARTMENT']['DEPARTMENT_ACCESS'][$x]);
               }
             }
@@ -89,8 +89,8 @@
             $result = $this->Connection->prepare($this->set_Query($this->Response['DEPARTMENT']['DEPARTMENT_USER_ACCESS'][$x]));
             $result->execute();
             while($row = $result->fetch(PDO::FETCH_ASSOC)){
-              if($row['AREA_STATUS'] == 1){
-                array_push($this->Response['DEPARTMENT']['AREA_TEMP'],$row['ID_AREA']);
+              if($row['area_status'] == 1){
+                array_push($this->Response['DEPARTMENT']['AREA_TEMP'],$row['id_area']);
               }
             }
             if(!empty($this->Response['DEPARTMENT']['AREA_TEMP'])){
@@ -109,7 +109,7 @@
                 $result = $this->Connection->prepare($this->set_Query($this->Response['DEPARTMENT']['DEPARTMENT_AREA'][$x],$key));
                 $result->execute();
                 while($row = $result->fetch(PDO::FETCH_ASSOC)){
-                  if($row['USER_DEPARTMENT_AREA_STATUS'] == 1){
+                  if($row['user_department_area_status'] == 1){
                     array_push($this->Response['DEPARTMENT']['AREA_TEMP'][$x], $key);
                   }
                 }
