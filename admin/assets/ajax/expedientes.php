@@ -187,7 +187,6 @@
               event.preventDefault();
               var val = $(this).attr('href');
               var strin = val.split('=',2);
-              alert(strin[1]);
               del_info(strin[1]);
               return false;
             });

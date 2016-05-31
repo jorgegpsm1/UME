@@ -94,6 +94,7 @@
             <input id="telefono" type="tel" class="form-control" autocomplete="off" required > 
           </div>
           <div class="form-group">
+            <label for="fecha" class="control-label">Fecha</label>
             <div class='input-group date' id='datetimepicker1'>
               <input type='text' id="fecha" class="form-control" />
               <span class="input-group-addon">
@@ -115,48 +116,87 @@
   (function(){
       $('#datetimepicker1').datetimepicker();
       get_info();
+      function clear_modal(){
+        $('#nombre_completo').val(''),
+        $('#apellido_paterno').val(''),
+        $('#apellido_materno').val(''),
+        $('#correo').val(''),
+        $('#telefono').val(''),
+        $('#fecha').val('')
+      }
       function get_info(){
         $("#myTable > tbody").html('');
         $.getJSON("./model/class/load_citas.php", function(){
-      console.log("success");
-      })
-      .done(function(Response,statusText,jqXhr){
-        var x;
-        for(x=0; x<Response['COUNT']; x++){
-          var newListItem = "<tr>";
-          newListItem+= "<td>" + Response['INFO'][x]['id_cita'] + "</td>";
-          newListItem+= "<td>" + Response['INFO'][x]['apellido_paterno'] + " " + Response['INFO'][x]['apellido_materno'] + " " + Response['INFO'][x]['nombre'] + "</td>";
-          newListItem+= "<td>" + Response['INFO'][x]['correo'] + "</td>";
-          newListItem+= "<td>" + Response['INFO'][x]['telefono'] + "</td>";
-          newListItem+= "<td>" + Response['INFO'][x]['fecha'] + "</td>";
-          newListItem+= "<td><span class='pull-center'>";
-          newListItem+= "<a class='btn btn-default' href='Editar_Cita_?id="+Response['INFO'][x]['ID_CITA']+"'><span class='glyphicon glyphicon-pencil'></span></a>";
-          newListItem+= "<a class='btn btn-default' href='Eliminar_Cita_?id="+Response['INFO'][x]['ID_CITA']+"'><span class='glyphicon glyphicon-trash'></span></a>";  
-          newListItem+= "</span></td>";
-          newListItem+= "</tr>";
-          $("#myTable > tbody").append(newListItem);
+          console.log("success");
+          })
+          .done(function(Response,statusText,jqXhr){
+            var x;
+            for(x=0; x<Response['COUNT']; x++){
+              var newListItem = "<tr>";
+              newListItem+= "<td>" + Response['INFO'][x]['id_cita'] + "</td>";
+              newListItem+= "<td>" + Response['INFO'][x]['apellido_paterno'] + " " + Response['INFO'][x]['apellido_materno'] + " " + Response['INFO'][x]['nombre'] + "</td>";
+              newListItem+= "<td>" + Response['INFO'][x]['correo'] + "</td>";
+              newListItem+= "<td>" + Response['INFO'][x]['telefono'] + "</td>";
+              newListItem+= "<td>" + Response['INFO'][x]['fecha'] + "</td>";
+              newListItem+= "<td><span class='pull-center'>";
+              newListItem+= "<a class='btn btn-default' href='eliminar_cita.php?uno="+Response['INFO'][x]['id_cita']+"'><span class='glyphicon glyphicon-trash'></span></a>";  
+              newListItem+= "</span></td>";
+              newListItem+= "</tr>";
+              $("#myTable > tbody").append(newListItem);
+            }
+          },function(){
+            $("a[href*='eliminar_cita.php']").click(function(event){
+              event.preventDefault();
+              var val = $(this).attr('href');
+              var strin = val.split('=',2);
+              del_info(strin[1]);
+              return false;
+            });
+          })
+          .fail(function() {
+          })
+          .always(function() {
+          });
         }
-      
-      })
-      .fail(function() {
-      })
-      .always(function() {
-    });
+      function del_info(datas){
+        var data = { 
+          urls:           datas
+        };
+        $.ajax({
+          type:          "post",
+          url:           "./model/class/eliminar_cita.php",
+          async:         true,
+          cache:         false,
+          data:          JSON.stringify(data),
+          contentType:   "application/json; charset=utf-8",
+          dataType :     "json",
+          success:       function(response){
+            if(response.Success){
+              get_info();
+            }
+            else{
+              alert("Error");
+            }
+          },
+          error:         function(response, error){
+            alert("Error Interno: " + error);
+          }  
+        });
+      return false;  
       }
-
       $('#crear_nueva_cita').click(function(e){
         var data = { 
-          nombre:       $('#nombre_completo').val(),
+          nombre:           $('#nombre_completo').val(),
           apellido_p:       $('#apellido_paterno').val(),
           apellido_m:       $('#apellido_materno').val(),
-          correo:       $('#correo').val(),
-          telefono:       $('#telefono').val(),
-          fecha:       $('#fecha').val()
+          correo:           $('#correo').val(),
+          telefono:         $('#telefono').val(),
+          fecha:            $('#fecha').val()
         };
         $.ajax({
           type:          "post",
           url:           "./model/class/create_cita.php",
-          async:         false,
+          async:         true,
           cache:         false,
           data:          JSON.stringify(data),
           contentType:   "application/json; charset=utf-8",
@@ -164,11 +204,13 @@
           success:       function(response){
             if(response.Success){
               $("#crear_cita").modal('toggle');
+              clear_modal();
               get_info();
             }
             else{
               $("#crear_cita").modal('toggle');
-              alert("Error");
+                clear_modal();
+                alert("Error");
             }
           },
           error:         function(response, error){

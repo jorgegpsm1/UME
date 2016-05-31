@@ -4,7 +4,7 @@
    $Connection   = Database::Connect();
 	$Query                   =    array();
    $Query['SQL_A']          =    "SELECT COUNT(id_user) as VAL FROM user_access";
-   $Query['SQL_B']          =    "SELECT id_user, user_login_name, user_status FROM user_access";
+   $Query['SQL_B']          =    "SELECT id_user, user_login_name FROM user_access";
    $DATA                    =    array("COUNT" => null,"INFO" => array());
    $result_1 = $Connection->prepare($Query['SQL_A']);
    $result_1->execute();

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <style>
   h3{
     text-align: center;
@@ -5,18 +6,6 @@
   }
   th,td{
     text-align: center;
-  }
-  .id{
-    width: 10%;
-  }
-  .user{
-    width: 25%;
-  }
-  .passwd{
-    width: 25%;
-  }
-  .action{
-    width: 40%;
   }
   #feedback{ 
     font-size: 1.4em; 
@@ -50,7 +39,7 @@
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create_user">Crear Usuario</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#crear_usuario">Crear Usuario</button>
       </div>
       <div class="col-md-10"></div>
       <div class="col-md-12">
@@ -59,10 +48,9 @@
             <table class="table" id="myTable">
               <thead>
               <tr class="info">
-                <th class="col-md-3">ID</th>
-                <th class="col-md-3">USUARIO</th>
-                <th class="col-md-3">ESTADO</th>
-                <th class="col-md-3">ACCIONES</th>
+                <th class="col-md-4">ID</th>
+                <th class="col-md-4">USUARIO</th>
+                <th class="col-md-4">ACCIONES</th>
               </tr>
               </thead>
               <tbody>
@@ -73,7 +61,7 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="create_user" tabindex="-1" role="dialog">
+  <div class="modal fade" id="crear_usuario" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -94,10 +82,9 @@
             <label for="Departamento" class="control-label">Departamento</label>
             <br />
           <select id="Departamento" >
-            <option value="1">Administracion</option>
-            <option value="2">Secretaria</option>
-            <option value="3">Medico</option>
-            <option value="4">Medico Diagnostico</option>
+            <option value="1">Sistemas</option>
+            <option value="2">Medicos</option>
+            <option value="3">Secretarias</option>
           </select>
           </div>
         </form>
@@ -112,36 +99,44 @@
 
 <script>
   (function(){
+    get_info();
+    function clear_modal(){
+      $('#new_user_name').val(''),
+      $('#new_user_password').val(''),
+      $('#Departamento').val(1)
+    }
+    function get_info(){
+      $("#myTable > tbody").html('');
       $.getJSON("./model/class/load_user.php", function(){
-      console.log("success");
+        console.log("success");
       })
       .done(function(Response,statusText,jqXhr){
-        var x,y;
+        var x;
         for(x=0; x<Response['COUNT']; x++){
-          y=0;
           var newListItem = "<tr>";
-          $.each(Response['INFO'][x], function(Key,Value ){
-            if(y==2){
-              newListItem+= "<td>" + Value + "</td>";
-              newListItem+= "<td><span class='pull-center'>";
-              newListItem+= "<a class='btn btn-default' href='Editar_Usuario_?id="+Response['INFO'][x]['ID_USER']+"'><span class='glyphicon glyphicon-pencil'></span></a>";
-              newListItem+= "<a class='btn btn-default' href='Eliminar_Usuario_?id="+Response['INFO'][x]['ID_USER']+"'><span class='glyphicon glyphicon-trash'></span></a>";  
-              newListItem+= "</span></td>";
-            }
-            else{
-              newListItem+= "<td>" + Value + "</td>"; 
-            }
-            y++;
-          });
-            newListItem+= "</tr>";
-            $("#myTable > tbody").append(newListItem);
+          newListItem+= "<td>" + Response['INFO'][x]['id_user'] + "</td>";
+          newListItem+= "<td>" + Response['INFO'][x]['user_login_name'] + "</td>";
+          newListItem+= "<td><span class='pull-center'>";
+          newListItem+= "<a class='btn btn-default' href='eliminar_usuario.php?uno="+Response['INFO'][x]['id_user']+"'><span class='glyphicon glyphicon-trash'></span></a>";  
+          newListItem+= "</span></td>";
+          newListItem+= "</tr>";
+          $("#myTable > tbody").append(newListItem);
         }
-      
-      })  //var newListItem = "<td><span class='pull-center'>" +  + "</span></td>";
+      },function(){
+          $("a[href*='eliminar_usuario.php']").click(function(event){
+            event.preventDefault();
+            var val = $(this).attr('href');
+            var strin = val.split('=',2);
+            del_info(strin[1]);
+            return false;
+          });
+      })
       .fail(function() {
       })
       .always(function() {
-    });
+      });
+    }
+
     $('#create_new_user').click(function(e){
           var data = { 
             NameUser:       $('#new_user_name').val(),
@@ -160,16 +155,14 @@
             },
             success:       function(response){
               if(response.Success){
-                $('#new_user_name').val(''),
-                $('#new_user_password').val(''),
-                $('#Departamento').val(1),
-                $("#create_user").modal('toggle');
+                get_info();
+                $("#crear_usuario").modal('toggle');
+                clear_modal();
               }
               else{
-                $('#new_user_name').val(''),
-                $('#new_user_password').val(''),
-                $('#Departamento').val(''),
-                $("#create_user").modal('toggle');
+                get_info();
+                $("#crear_usuario").modal('toggle');
+                clear_modal();
               }
             },
             error:         function(response, error){
